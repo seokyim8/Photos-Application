@@ -1,5 +1,17 @@
 package view.States;
 
-public class HomeState {
+public class HomeState extends PhotosState{
+
+	@Override
+	public void enter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void processEvent() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
