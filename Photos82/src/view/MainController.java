@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +10,8 @@ import javafx.stage.Stage;
 import view.States.*;
 
 public class MainController {//should we add Scene to UML CLASS DIAGRAM??
+	Stage primaryStage;
+	
 	//controllers
 	LoginController login_controller;
 	Scene login_scene;
@@ -40,11 +43,17 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 	
 	
 	public void start(Stage primaryStage) throws IOException {
+		this.primaryStage = primaryStage;
 		this.setup();
 		primaryStage.setScene(this.login_scene);
 		primaryStage.setTitle("Log in");
 		primaryStage.setResizable(false);
 		primaryStage.show();
+	}
+	
+	public void processEvent(ActionEvent e) {//temporary; for testing purposes
+		primaryStage.setScene(home_scene);//do I need to do primaryStage.show()?
+		primaryStage.setTitle("Home");
 	}
 	
 	private void setup() throws IOException {
