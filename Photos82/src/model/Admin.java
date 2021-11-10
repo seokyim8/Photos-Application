@@ -35,11 +35,23 @@ public class Admin implements Serializable{
 	}
 	
 	public boolean addUser(String name) {
-		//TODO: fill in 
-		return false;
+		//check duplicate user names
+		for(int i = 0; i < this.users.size(); i++) {
+			if(this.users.get(i).username.compareTo(name) == 0) {
+				return false;
+			}
+		}
+		User user = new User(name);
+		this.users.add(user);
+		return true;
 	}
 	public boolean deleteuser(String name) {
-		//TODO: fill in
+		for(int i = 0; i < this.users.size(); i++) {
+			if(this.users.get(i).username == name) {
+				this.users.remove(i);
+				return true;
+			}
+		}
 		return false;
 	}
 }
