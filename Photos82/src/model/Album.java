@@ -8,4 +8,11 @@ public class Album {
 	String date_range;
 	User user;
 	ArrayList<Photo> photos;
+	
+	public void addPhoto() {
+		
+	}
+	public void deletePhoto() {
+		
+	}
 }

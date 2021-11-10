@@ -15,4 +15,16 @@ public class User{
 		this.tagnames.add("location");
 		this.tagnames.add("person");
 	}
+	public void createAlbum() {//add to UML?
+		
+	}
+	public void deleteAlbum() {
+		
+	}
+	public void createTag() {
+		
+	}
+	public void deleteTag() {
+		
+	}
 }
