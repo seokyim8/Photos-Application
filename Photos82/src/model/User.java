@@ -3,9 +3,9 @@ package model;
 import java.util.ArrayList;
 
 public class User{
-	String username;
-	ArrayList<String> tagnames;
-	ArrayList<Album> albums;
+	public String username;
+	public ArrayList<String> tagnames;
+	public ArrayList<Album> albums;
 
 	public User(String username) {
 		this.username = username;
@@ -15,16 +15,42 @@ public class User{
 		this.tagnames.add("location");
 		this.tagnames.add("person");
 	}
-	public void createAlbum() {//add to UML?
+	public boolean createAlbum(String name) {//add to UML?
+		for(int i = 0; i < this.albums.size(); i++) {
+			if(this.albums.get(i).name.compareTo(name) == 0) {
+				return false;//album names unique for each user
+			}
+		}
+		Album album = new Album(name,this);
+		this.albums.add(album);
+		return true;
 		
 	}
-	public void deleteAlbum() {
-		
+	public boolean deleteAlbum(String name) {
+		for(int i = 0; i < this.albums.size(); i++) {
+			if(this.albums.get(i).name.compareTo(name) == 0) {
+				this.albums.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
-	public void createTag() {
-		
+	public boolean createTag(String name) {
+		for(int i = 0; i < this.tagnames.size(); i++) {
+			if(this.tagnames.get(i).compareTo(name) == 0) {
+				return false;
+			}
+		}
+		this.tagnames.add(name);
+		return true;
 	}
-	public void deleteTag() {
-		
+	public boolean deleteTag(String name) {
+		for(int i = 0; i < this.tagnames.size(); i++) {
+			if(this.tagnames.get(i).compareTo(name) == 0) {
+				this.tagnames.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 }

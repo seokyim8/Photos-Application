@@ -11,13 +11,14 @@ public class Photo {
 	ArrayList<Album> albums;
 	ArrayList<Tag> tags;
 	
-	public Photo(String filePath) {
+	public Photo(String filePath, Album album) {
 		this.filePath = filePath;
 		ZoneId zid = ZoneId.of("America/New_York");
 		this.date = LocalDate.now(zid);
 		this.albums = new ArrayList<Album>();
 		this.tags = new ArrayList<Tag>();
 		this.caption = "";
+		this.albums.add(album);
 	}
 	public boolean addTag(String name, String value) {
 		for(int i = 0; i < this.tags.size(); i++) {
@@ -26,7 +27,7 @@ public class Photo {
 				return false;//tag name + value combination has to be unique for a photo
 			}
 		}
-		Tag tag = new Tag(name,value);
+		Tag tag = new Tag(name,value,this);
 		this.tags.add(tag);
 		return true;
 	}

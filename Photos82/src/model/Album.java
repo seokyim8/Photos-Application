@@ -9,6 +9,12 @@ public class Album {
 	User user;
 	ArrayList<Photo> photos;
 	
+	public Album(String name, User user) {
+		this.name = name;
+		this.user = user;
+		this.photos = new ArrayList<Photo>();
+	}
+	
 	public void addPhoto() {
 		
 	}

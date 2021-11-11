@@ -18,7 +18,7 @@ public class Admin implements Serializable{
 	public static final String storeDir = "";
 	public static final String storeFile = "";
 	
-	ArrayList<User> users;
+	public ArrayList<User> users;
 	
 	public static void writeApp(Admin admin) throws IOException {//add to UML??
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir 
