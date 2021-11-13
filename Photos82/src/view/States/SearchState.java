@@ -1,5 +1,6 @@
 package view.States;
 
+import javafx.event.ActionEvent;
 import view.MainController;
 
 public class SearchState extends PhotosState{
@@ -19,9 +20,9 @@ public class SearchState extends PhotosState{
 	}
 
 	@Override
-	public void processEvent() {
+	public PhotosState processEvent(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 	public static SearchState getInstance() {
 		if(SearchState.currentState == null) {

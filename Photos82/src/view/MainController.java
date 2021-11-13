@@ -130,7 +130,6 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 		this.slideshow_state = SlideshowState.getInstance();this.slideshow_state.setup(this);
 		this.addphoto_state = AddPhotoState.getInstance();this.addphoto_state.setup(this);
 		this.editphoto_state = EditPhotoState.getInstance();this.editphoto_state.setup(this);
-		
 		this.current_state = this.login_state;
 	}
 }

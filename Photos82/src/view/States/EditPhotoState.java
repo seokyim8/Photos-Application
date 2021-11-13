@@ -1,5 +1,6 @@
 package view.States;
 
+import javafx.event.ActionEvent;
 import view.MainController;
 
 public class EditPhotoState extends PhotosState{
@@ -19,9 +20,9 @@ public class EditPhotoState extends PhotosState{
 	}
 
 	@Override
-	public void processEvent() {
+	public PhotosState processEvent(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 	public static EditPhotoState getInstance() {
 		if(EditPhotoState.currentState == null) {

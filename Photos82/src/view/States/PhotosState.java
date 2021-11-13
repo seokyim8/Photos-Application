@@ -1,5 +1,6 @@
 package view.States;
 
+import javafx.event.ActionEvent;
 import model.Album;
 import model.Photo;
 import model.User;
@@ -14,5 +15,5 @@ public abstract class PhotosState {
 	
 	public abstract void setup(MainController mc);
 	public abstract void enter();
-	public abstract void processEvent();
+	public abstract PhotosState processEvent(ActionEvent e);
 }
