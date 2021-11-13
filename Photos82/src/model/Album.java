@@ -1,12 +1,13 @@
 package model;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Album {
 	String name;
 	int num_of_photos;
-	String date_range;
+	LocalDateTime[] date_range;
 	User user;
 	ArrayList<Photo> photos;
 	
@@ -23,7 +24,7 @@ public class Album {
 	 * @return	0 if successful, 1 if filePath was invalid, 2 if photo already exists 
 	 * @throws IOException 
 	 */
-	public int addPhoto(String filePath) throws IOException {//need to apply change to date_range
+	public int addPhoto(String filePath) throws IOException {
 		for(int i = 0; i < this.photos.size(); i++) {
 			if(this.photos.get(i).filePath.compareTo(filePath)== 0) {
 				return 2;
@@ -37,18 +38,46 @@ public class Album {
 		this.photos.add(photo);
 		this.num_of_photos++;
 		
-		//apply change to date_range
+		if(this.date_range == null) {
+			this.date_range = new LocalDateTime[2];
+			this.date_range[0] = photo.datetime;
+			this.date_range[1] = photo.datetime;
+		}
+		else {
+			if(this.date_range[0].isAfter(photo.datetime)) {
+				this.date_range[0] = photo.datetime;
+			}
+			else if(this.date_range[1].isBefore(photo.datetime)) {
+				this.date_range[1] = photo.datetime;
+			}
+		}
 		
 		return 0;
 	}
-	public boolean deletePhoto(String filePath) {//need to apply change to date_range
+	public boolean deletePhoto(String filePath) {
 		for(int i = 0; i < this.photos.size(); i++) {
 			if(this.photos.get(i).filePath.compareTo(filePath)== 0) {
 				this.photos.remove(i);
 				this.num_of_photos--;
-				//apply change to date_range
-
-				
+				//apply change to date_range --> should Album just maintain a sorted list of photos?
+				if(this.photos.size() == 0) {
+					this.date_range = null;
+				}
+				else {
+					LocalDateTime max = this.photos.get(0).datetime;
+					LocalDateTime min = this.photos.get(0).datetime;
+					for(int j = 1; j < this.photos.size(); j++) {
+						LocalDateTime temp = this.photos.get(j).datetime;
+						if(max.isBefore(temp)) {
+							max = temp;
+						}
+						if(min.isAfter(temp)) {
+							min = temp;
+						}
+					}
+					this.date_range[0] = min;
+					this.date_range[1] = max;
+				}
 				return true;
 			}
 		}
