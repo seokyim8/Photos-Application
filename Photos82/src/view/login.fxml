@@ -19,7 +19,7 @@
          </font>
       </Text>
       <TextField fx:id="username_textfield" layoutX="220.0" layoutY="166.0" prefHeight="26.0" prefWidth="200.0" />
-      <Button fx:id="login_button" layoutX="220.0" layoutY="239.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="login" />
-      <Button fx:id="quit_button" layoutX="333.0" layoutY="239.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Quit" />
+      <Button fx:id="login_button" layoutX="220.0" layoutY="239.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="66.0" text="login" />
+      <Button fx:id="quit_button" layoutX="333.0" layoutY="239.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="66.0" text="Quit" />
    </children>
 </AnchorPane>

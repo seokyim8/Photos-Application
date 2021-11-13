@@ -1,7 +1,6 @@
 package view;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -15,11 +14,8 @@ public class LoginController implements Controller{
 	
 	public void setup(MainController mc) {
 		this.main_controller = mc;
-		
-		login_button.setOnAction(e->processEvent(e));
-		quit_button.setOnAction(e->processEvent(e));
 	}
-	
+	@FXML
 	private void processEvent(ActionEvent e) {
 		this.main_controller.processEvent(e);
 	}

@@ -9,13 +9,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchController">
    <children>
-      <Button fx:id="quit_button" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="99.0" text="Quit" />
-      <Button fx:id="go_back_home_button" layoutX="159.0" layoutY="15.0" mnemonicParsing="false" text="Go Back Home" />
+      <Button fx:id="quit_button" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="99.0" text="Quit" />
+      <Button fx:id="go_back_home_button" layoutX="159.0" layoutY="15.0" mnemonicParsing="false" onAction="#processEvent" text="Go Back Home" />
       <ListView fx:id="photos_listview" layoutX="14.0" layoutY="59.0" prefHeight="282.0" prefWidth="389.0" />
-      <Button fx:id="create_album_button" layoutX="90.0" layoutY="360.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="237.0" text="Create Album Based on Search Result" />
+      <Button fx:id="create_album_button" layoutX="90.0" layoutY="360.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="237.0" text="Create Album Based on Search Result" />
       <Text layoutX="456.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search/Filter Photos">
          <font>
             <Font size="16.0" />
@@ -23,14 +22,14 @@
       </Text>
       <TextField fx:id="from_textfield" layoutX="445.0" layoutY="57.0" promptText="From (ex: 2021-9-6)" />
       <TextField fx:id="to_textfield" layoutX="445.0" layoutY="90.0" promptText="To" />
-      <Button fx:id="search_by_date_button" layoutX="475.0" layoutY="126.0" mnemonicParsing="false" text="Search By Date" />
+      <Button fx:id="search_by_date_button" layoutX="475.0" layoutY="126.0" mnemonicParsing="false" onAction="#processEvent" text="Search By Date" />
       <ComboBox fx:id="tag_name1_combobox" layoutX="416.0" layoutY="187.0" prefHeight="26.0" prefWidth="101.0" promptText="Tag name" />
       <TextField fx:id="tag_value1_textfield" layoutX="526.0" layoutY="187.0" prefHeight="26.0" prefWidth="113.0" promptText="value" />
       <ComboBox fx:id="tag_name2_combobox" layoutX="416.0" layoutY="256.0" prefHeight="26.0" prefWidth="101.0" promptText="Tag name" />
       <TextField fx:id="tag_value2_textfield" layoutX="526.0" layoutY="256.0" prefHeight="26.0" prefWidth="113.0" promptText="value" />
       <ComboBox fx:id="and_or_combobox" layoutX="473.0" layoutY="221.0" prefHeight="26.0" prefWidth="101.0" promptText="AND/OR" />
-      <Button fx:id="search_by_tags_button" layoutX="474.0" layoutY="294.0" mnemonicParsing="false" text="Search By Tags" />
-      <Button fx:id="clear_button" layoutX="487.0" layoutY="360.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="clear" />
+      <Button fx:id="search_by_tags_button" layoutX="474.0" layoutY="294.0" mnemonicParsing="false" onAction="#processEvent" text="Search By Tags" />
+      <Button fx:id="clear_button" layoutX="487.0" layoutY="360.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="79.0" text="clear" />
       <Separator layoutX="427.0" layoutY="167.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
