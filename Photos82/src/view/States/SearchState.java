@@ -1,6 +1,10 @@
 package view.States;
 
 import javafx.event.ActionEvent;
+import model.Admin;
+import model.Album;
+import model.Photo;
+import model.User;
 import view.MainController;
 
 public class SearchState extends PhotosState{
@@ -14,7 +18,7 @@ public class SearchState extends PhotosState{
 		this.main_controller = mc;
 	}
 	@Override
-	public void enter() {
+	public void enter(Admin admin, User user, Album album, Photo photo) {
 		// TODO Auto-generated method stub
 		
 	}

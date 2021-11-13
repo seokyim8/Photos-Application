@@ -16,6 +16,6 @@ public abstract class PhotosState {
 	protected Photo photo;
 	
 	public abstract void setup(MainController mc);
-	public abstract void enter();
+	public abstract void enter(Admin admin, User user, Album album, Photo photo);
 	public abstract PhotosState processEvent(ActionEvent e);
 }

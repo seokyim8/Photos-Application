@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class AdminController implements Controller{
 	public @FXML Button quit_button;
 	public @FXML ListView<String> user_listview;
 	public @FXML TextField add_textfield;
+	public ObservableList<String> obs;
 
 	public void setup(MainController mc) {
 		this.main_controller = mc;

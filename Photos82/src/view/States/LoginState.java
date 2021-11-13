@@ -7,6 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import model.Admin;
+import model.Album;
+import model.Photo;
+import model.User;
 import view.MainController;
 
 public class LoginState extends PhotosState{
@@ -20,7 +23,7 @@ public class LoginState extends PhotosState{
 		this.main_controller = mc;
 	}
 	@Override
-	public void enter() {
+	public void enter(Admin admin, User user, Album album, Photo photo) {
 		try {
 			this.admin = Admin.readApp();
 		} catch (ClassNotFoundException e1) {
@@ -45,7 +48,7 @@ public class LoginState extends PhotosState{
 		String typed_username = this.main_controller.login_controller.username_textfield.getText();
 		if(typed_username.compareTo("admin") == 0) {//administrator case
 			AdminState temp = this.main_controller.admin_state;
-			temp.admin = this.admin; 
+			temp.enter(this.admin, this.user, this.album, this.photo);
 			this.main_controller.primaryStage.setScene(this.main_controller.admin_scene);
 			return temp;
 		}
@@ -54,8 +57,7 @@ public class LoginState extends PhotosState{
 			if(this.admin.users.get(i).username.compareTo(typed_username) == 0) {
 				this.user = this.admin.users.get(i);
 				HomeState temp = this.main_controller.home_state;
-				temp.admin = this.admin;
-				temp.user = this.user;
+				temp.enter(this.admin,this.user,this.album,this.photo);
 				this.main_controller.primaryStage.setScene(this.main_controller.home_scene);
 				return temp;
 			}

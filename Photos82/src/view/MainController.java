@@ -47,7 +47,7 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 		this.primaryStage = primaryStage;
 		this.primaryStage.setOnCloseRequest(e->Platform.exit());
 		this.setup();
-		this.current_state.enter();
+		this.current_state.enter(null,null,null,null);
 		primaryStage.setScene(this.login_scene);
 		primaryStage.setTitle("Log in");
 		primaryStage.setResizable(false);
