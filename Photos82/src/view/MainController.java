@@ -52,8 +52,7 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 	}
 	
 	public void processEvent(ActionEvent e) {//temporary; for testing purposes
-		primaryStage.setScene(home_scene);//do I need to do primaryStage.show()?
-		primaryStage.setTitle("Home");
+		this.current_state = this.current_state.processEvent(e);
 	}
 	
 	private void setup() throws IOException {
