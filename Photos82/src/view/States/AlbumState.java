@@ -23,7 +23,7 @@ public class AlbumState extends PhotosState{
 		// TODO Auto-generated method stub
 		
 	}
-	private static AlbumState getInstance() {
+	public static AlbumState getInstance() {
 		if(AlbumState.currentState == null) {
 			AlbumState.currentState = new AlbumState();
 		}
