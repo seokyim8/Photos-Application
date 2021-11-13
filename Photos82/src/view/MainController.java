@@ -122,5 +122,6 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 		editphoto_controller.setup(this);
 		
 		//setting up states
+		
 	}
 }
