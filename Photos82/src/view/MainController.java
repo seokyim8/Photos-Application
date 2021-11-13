@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,41 +11,43 @@ import javafx.stage.Stage;
 import view.States.*;
 
 public class MainController {//should we add Scene to UML CLASS DIAGRAM??
-	Stage primaryStage;
+	public Stage primaryStage;
 	
 	//controllers
-	LoginController login_controller;
-	Scene login_scene;
-	AdminController admin_controller;
-	Scene admin_scene;
-	HomeController home_controller;
-	Scene home_scene;
-	SearchController search_controller;
-	Scene search_scene;
-	AlbumController album_controller;
-	Scene album_scene;
-	SlideshowController slideshow_controller;
-	Scene slideshow_scene;
-	AddPhotoController addphoto_controller;
-	Scene addphoto_scene;
-	EditPhotoController editphoto_controller;
-	Scene editphoto_scene;
+	public LoginController login_controller;
+	public Scene login_scene;
+	public AdminController admin_controller;
+	public Scene admin_scene;
+	public HomeController home_controller;
+	public Scene home_scene;
+	public SearchController search_controller;
+	public Scene search_scene;
+	public AlbumController album_controller;
+	public Scene album_scene;
+	public SlideshowController slideshow_controller;
+	public Scene slideshow_scene;
+	public AddPhotoController addphoto_controller;
+	public Scene addphoto_scene;
+	public EditPhotoController editphoto_controller;
+	public Scene editphoto_scene;
 	
 	//states
-	PhotosState current_state;
-	LoginState login_state;
-	AdminState admin_state;
-	HomeState home_state;
-	SearchState search_state;
-	AlbumState album_state;
-	SlideshowState slideshow_state;
-	AddPhotoState addphoto_state;
-	EditPhotoState editphoto_state;
+	public PhotosState current_state;
+	public LoginState login_state;
+	public AdminState admin_state;
+	public HomeState home_state;
+	public SearchState search_state;
+	public AlbumState album_state;
+	public SlideshowState slideshow_state;
+	public AddPhotoState addphoto_state;
+	public EditPhotoState editphoto_state;
 	
 	
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
+		this.primaryStage.setOnCloseRequest(e->Platform.exit());
 		this.setup();
+		this.current_state.enter();
 		primaryStage.setScene(this.login_scene);
 		primaryStage.setTitle("Log in");
 		primaryStage.setResizable(false);

@@ -15,10 +15,14 @@ public class Admin implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final String storeDir = "";
-	public static final String storeFile = "";
+	public static final String storeDir = "src/model/dat";
+	public static final String storeFile = "admin.dat";
 	
 	public ArrayList<User> users;
+	
+	public Admin() {
+		this.users = new ArrayList<User>();
+	}
 	
 	public static void writeApp(Admin admin) throws IOException {//add to UML??
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir 

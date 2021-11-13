@@ -8,9 +8,9 @@ import javafx.scene.control.TextField;
 public class LoginController implements Controller{
 	MainController main_controller;
 	
-	@FXML Button login_button;
-	@FXML Button quit_button;
-	@FXML TextField username_textfield;
+	public @FXML Button login_button;
+	public @FXML Button quit_button;
+	public @FXML TextField username_textfield;
 	
 	public void setup(MainController mc) {
 		this.main_controller = mc;

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SlideshowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SlideshowController">
    <children>
       <ImageView fx:id="photo_imageview" fitHeight="245.0" fitWidth="359.0" layoutX="121.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="left_button" layoutX="37.0" layoutY="147.0" mnemonicParsing="false" onAction="#processEvent" style="-fx-background-color: transparent;">

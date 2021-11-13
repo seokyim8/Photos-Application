@@ -9,14 +9,14 @@ import javafx.scene.text.Text;
 public class SlideshowController implements Controller{
 	MainController main_controller;
 	
-	@FXML Button left_button;
-	@FXML Button right_button;
-	@FXML Button album_button;
-	@FXML Button quit_button;
-	@FXML Text caption_text;
-	@FXML Text tags_text;
-	@FXML Text date_text;
-	@FXML ImageView photo_imageview;
+	public @FXML Button left_button;
+	public @FXML Button right_button;
+	public @FXML Button album_button;
+	public @FXML Button quit_button;
+	public @FXML Text caption_text;
+	public @FXML Text tags_text;
+	public @FXML Text date_text;
+	public @FXML ImageView photo_imageview;
 
 	
 	public void setup(MainController mc) {

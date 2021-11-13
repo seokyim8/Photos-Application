@@ -10,17 +10,17 @@ import javafx.scene.text.Text;
 public class AlbumController implements Controller{
 	MainController main_controller;
 	
-	@FXML Button rename_album_button;
-	@FXML Button home_button;
-	@FXML Button slideshow_button;
-	@FXML Button add_photo_button;
-	@FXML Button remove_photo_button;
-	@FXML Button edit_photo_button;
-	@FXML Button log_out_button;
-	@FXML Button quit_button;
-	@FXML TextField rename_album_textfield;
-	@FXML Text album_info_text;
-	@FXML ListView<String> photos_list;
+	public @FXML Button rename_album_button;
+	public @FXML Button home_button;
+	public @FXML Button slideshow_button;
+	public @FXML Button add_photo_button;
+	public @FXML Button remove_photo_button;
+	public @FXML Button edit_photo_button;
+	public @FXML Button log_out_button;
+	public @FXML Button quit_button;
+	public @FXML TextField rename_album_textfield;
+	public @FXML Text album_info_text;
+	public @FXML ListView<String> photos_list;
 
 	
 	public void setup(MainController mc) {

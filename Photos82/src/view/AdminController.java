@@ -9,12 +9,12 @@ import javafx.scene.control.TextField;
 public class AdminController implements Controller{
 	MainController main_controller;
 	
-	@FXML Button delete_button;
-	@FXML Button add_button;
-	@FXML Button log_out_button;
-	@FXML Button quit_button;
-	@FXML ListView<String> user_listview;
-	@FXML TextField add_textfield;
+	public @FXML Button delete_button;
+	public @FXML Button add_button;
+	public @FXML Button log_out_button;
+	public @FXML Button quit_button;
+	public @FXML ListView<String> user_listview;
+	public @FXML TextField add_textfield;
 
 	public void setup(MainController mc) {
 		this.main_controller = mc;

@@ -11,20 +11,20 @@ import javafx.scene.control.TextField;
 public class SearchController implements Controller{
 	MainController main_controller;
 	
-	@FXML Button quit_button;
-	@FXML Button go_back_home_button;
-	@FXML Button create_album_button;
-	@FXML Button search_by_date_button;
-	@FXML Button search_by_tags_button;
-	@FXML Button clear_button;
-	@FXML ListView<String> photos_listview;
-	@FXML TextField from_textfield;
-	@FXML TextField to_textfield;
-	@FXML TextField tag_value1_textfield;
-	@FXML TextField tag_value2_textfield;
-	@FXML ComboBox<String> tag_name1_combobox;
-	@FXML ComboBox<String> tag_name2_combobox;
-	@FXML ComboBox<String> and_or_combobox;
+	public @FXML Button quit_button;
+	public @FXML Button go_back_home_button;
+	public @FXML Button create_album_button;
+	public @FXML Button search_by_date_button;
+	public @FXML Button search_by_tags_button;
+	public @FXML Button clear_button;
+	public @FXML ListView<String> photos_listview;
+	public @FXML TextField from_textfield;
+	public @FXML TextField to_textfield;
+	public @FXML TextField tag_value1_textfield;
+	public @FXML TextField tag_value2_textfield;
+	public @FXML ComboBox<String> tag_name1_combobox;
+	public @FXML ComboBox<String> tag_name2_combobox;
+	public @FXML ComboBox<String> and_or_combobox;
 	
 	public void setup(MainController mc) {
 		this.main_controller = mc;
