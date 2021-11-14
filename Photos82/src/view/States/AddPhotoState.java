@@ -24,6 +24,7 @@ public class AddPhotoState extends PhotosState{
 	}
 	@Override
 	public void enter(Admin admin, User user, Album album, Photo photo) {
+		this.main_controller.primaryStage.setTitle("Add Photo");
 		this.admin = admin;
 		this.user = user;
 		this.album = album;

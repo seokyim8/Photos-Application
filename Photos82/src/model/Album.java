@@ -64,34 +64,32 @@ public class Album implements Serializable{
 		
 		return 0;
 	}
-	public boolean deletePhoto(String filePath) {
-		for(int i = 0; i < this.photos.size(); i++) {
-			if(this.photos.get(i).filePath.compareTo(filePath)== 0) {
-				this.photos.remove(i);
-				this.num_of_photos--;
-				//apply change to date_range --> should Album just maintain a sorted list of photos?
-				if(this.photos.size() == 0) {
-					this.date_range = null;
-				}
-				else {
-					LocalDateTime max = this.photos.get(0).datetime;
-					LocalDateTime min = this.photos.get(0).datetime;
-					for(int j = 1; j < this.photos.size(); j++) {
-						LocalDateTime temp = this.photos.get(j).datetime;
-						if(max.isBefore(temp)) {
-							max = temp;
-						}
-						if(min.isAfter(temp)) {
-							min = temp;
-						}
-					}
-					this.date_range[0] = min;
-					this.date_range[1] = max;
-				}
-				return true;
-			}
+	public boolean deletePhoto(int index) {
+		if(index < 0 || index >= this.photos.size()) {
+			return false;
 		}
-		return false;
+		this.photos.remove(index);
+		this.num_of_photos--;
+		//apply change to date_range --> should Album just maintain a sorted list of photos?
+		if(this.photos.size() == 0) {
+			this.date_range = new LocalDateTime[2];
+		}
+		else {
+			LocalDateTime max = this.photos.get(0).datetime;
+			LocalDateTime min = this.photos.get(0).datetime;
+			for(int j = 1; j < this.photos.size(); j++) {
+				LocalDateTime temp = this.photos.get(j).datetime;
+				if(max.isBefore(temp)) {
+					max = temp;
+				}
+				if(min.isAfter(temp)) {
+					min = temp;
+				}
+			}
+			this.date_range[0] = min;
+			this.date_range[1] = max;
+		}
+		return true;
 	}
 	public boolean rename(String name) {
 		for(int i = 0; i < this.user.albums.size(); i++) {

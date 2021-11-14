@@ -26,6 +26,7 @@ public class HomeState extends PhotosState{
 	}
 	@Override
 	public void enter(Admin admin, User user, Album album, Photo photo) {
+		this.main_controller.primaryStage.setTitle("Home");
 		this.admin = admin;
 		this.user = user;
 		this.album = album;
@@ -40,13 +41,13 @@ public class HomeState extends PhotosState{
 				fromDate = "none";
 			}
 			else {
-				fromDate = temp.date_range[0].toString();
+				fromDate = temp.date_range[0].toLocalDate().toString();
 			}
 			if(temp.date_range[1] == null) {
 				toDate = "none";
 			}
 			else {
-				toDate = temp.date_range[1].toString();
+				toDate = temp.date_range[1].toLocalDate().toString();
 			}
 			obs.add("Album Name: " + temp.name + "\nNumber of Photos: " + temp.num_of_photos
 					+ "\nDate Range: " + fromDate + " to " + toDate);
@@ -63,7 +64,9 @@ public class HomeState extends PhotosState{
 		}
 		if(button == this.main_controller.home_controller.log_out_button) {
 			this.main_controller.primaryStage.setScene(this.main_controller.login_scene);
-			return this.main_controller.login_state;
+			LoginState tempState = this.main_controller.login_state;
+			tempState.enter(null,null,null,null);
+			return tempState;
 		}
 		if(button == this.main_controller.home_controller.create_album_button) {
 			String tbc_album = this.main_controller.home_controller.create_album_textfield.getText();

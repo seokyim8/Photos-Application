@@ -16,4 +16,7 @@ public class Tag implements Serializable{
 		this.value = value;
 		this.photo = photo;
 	}
+	public String toString() {
+		return this.name + ": " + this.value;
+	}
 }

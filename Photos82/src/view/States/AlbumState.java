@@ -33,6 +33,7 @@ public class AlbumState extends PhotosState{
 	}
 	@Override
 	public void enter(Admin admin, User user, Album album, Photo photo) {
+		this.main_controller.primaryStage.setTitle("Album");
 		this.admin = admin;
 		this.user = user;
 		this.album = album;
@@ -67,7 +68,12 @@ public class AlbumState extends PhotosState{
 					}
 					String tags_list_string = "";
 					for(int i = 0; i < temp_photo.tags.size(); i++) {
-						tags_list_string += temp_photo.tags.get(i)+ " ";
+						if(i == temp_photo.tags.size()-1) {
+							tags_list_string += temp_photo.tags.get(i);
+						}
+						else {
+							tags_list_string += temp_photo.tags.get(i)+ ", ";
+						}
 					}
 					String refined_datetime = refineLocalDateTime(temp_photo.datetime);
 					setText("Caption: " + temp_photo.caption + "\nDate-time: " + 
@@ -92,7 +98,9 @@ public class AlbumState extends PhotosState{
 		}
 		if(button == this.main_controller.album_controller.log_out_button) {
 			this.main_controller.primaryStage.setScene(this.main_controller.login_scene);
-			return this.main_controller.login_state;
+			LoginState tempState = this.main_controller.login_state;
+			tempState.enter(null,null,null,null);
+			return tempState;
 		}
 		if(button == this.main_controller.album_controller.home_button) {
 			this.main_controller.primaryStage.setScene(this.main_controller.home_scene);
@@ -155,13 +163,14 @@ public class AlbumState extends PhotosState{
 		}
 		int index = this.main_controller.album_controller.photos_list.getSelectionModel().getSelectedIndex();
 		this.main_controller.album_controller.obs.remove(index);
-		this.album.photos.remove(index);
+		this.album.deletePhoto(index);
 		try {
 			Admin.writeApp(this.admin);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		updateAlbumInfo();
 		return this;
 	}
 	public static AlbumState getInstance() {

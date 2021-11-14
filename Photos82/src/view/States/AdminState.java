@@ -26,6 +26,7 @@ public class AdminState extends PhotosState{
 	}
 	@Override
 	public void enter(Admin admin, User user, Album album, Photo photo) {
+		this.main_controller.primaryStage.setTitle("Admin Subsystem");
 		this.admin = admin;
 		this.user = user;
 		this.album = album;
@@ -49,7 +50,9 @@ public class AdminState extends PhotosState{
 		}
 		if(button == this.main_controller.admin_controller.log_out_button) {
 			this.main_controller.primaryStage.setScene(this.main_controller.login_scene);
-			return this.main_controller.login_state;
+			LoginState tempState = this.main_controller.login_state;
+			tempState.enter(null,null,null,null);
+			return tempState;
 		}
 		if(button == this.main_controller.admin_controller.add_button) {
 			String typed_username = this.main_controller.admin_controller.add_textfield.getText();

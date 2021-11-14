@@ -24,6 +24,7 @@ public class LoginState extends PhotosState{
 	}
 	@Override
 	public void enter(Admin admin, User user, Album album, Photo photo) {
+		this.main_controller.primaryStage.setTitle("Log In");
 		try {
 			this.admin = Admin.readApp();
 		} catch (ClassNotFoundException e1) {
