@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,7 +22,8 @@ public class AlbumController implements Controller{
 	public @FXML TextField rename_album_textfield;
 	public @FXML Text album_info_text;
 	public @FXML ListView<String> photos_list;
-
+	public ObservableList<String> obs;
+	
 	
 	public void setup(MainController mc) {
 		this.main_controller = mc;

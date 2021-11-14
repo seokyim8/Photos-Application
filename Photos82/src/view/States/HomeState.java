@@ -114,7 +114,20 @@ public class HomeState extends PhotosState{
 			return tempState;
 		}
 		if(button == this.main_controller.home_controller.open_album_button) {
+			if(this.main_controller.home_controller.albums_listview.getSelectionModel().isEmpty()) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: no album selected");
+				alert.setContentText("Error: No album is selected. Please select "
+						+ "an album from the list that you want to open.");
+				alert.showAndWait();
+				return this;
+			}
+			
 			AlbumState tempState = this.main_controller.album_state;
+			int index = this.main_controller.home_controller.albums_listview.getSelectionModel().getSelectedIndex();
+			this.album = this.user.albums.get(index);
 			tempState.enter(this.admin, this.user, this.album, this.photo);
 			this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
 			return tempState;
