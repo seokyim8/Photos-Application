@@ -2,13 +2,18 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
-public class Photo {
+public class Photo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String filePath;
 	String caption;
 	LocalDateTime datetime;

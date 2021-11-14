@@ -1,10 +1,15 @@
 package model;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Album {
+public class Album implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String name;
 	int num_of_photos;
 	LocalDateTime[] date_range;

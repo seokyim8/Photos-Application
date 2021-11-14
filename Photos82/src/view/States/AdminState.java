@@ -1,5 +1,7 @@
 package view.States;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,6 +55,13 @@ public class AdminState extends PhotosState{
 			String typed_username = this.main_controller.admin_controller.add_textfield.getText();
 			if(this.admin.addUser(typed_username)) {
 				obs.add(typed_username);
+				try {
+					Admin.writeApp(this.admin);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					this.main_controller.primaryStage.close();
+				}
 				return this;
 			}
 			else {
@@ -66,12 +75,34 @@ public class AdminState extends PhotosState{
 				return this;
 			}
 		}
-		//button was delete user --> still not sure if this is correct
-		this.admin.deleteuser(this.main_controller.admin_controller.user_listview.getSelectionModel().getSelectedItem());
-		return this;
-		
-		//HAVE TO ADD DATA TO STORING FILE WHEN MAKING CHANGES!
-		//DO NOT alLOW space as username !! or are there other restrictions??
+		//button was delete user
+		if(this.main_controller.admin_controller.user_listview.getSelectionModel().isEmpty()) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(this.main_controller.primaryStage);
+			alert.setResizable(false);
+			alert.setHeaderText("Error: no selection");
+			alert.setContentText("Error: No username is selected for deletion. Please select "
+					+ "a username in the list.");
+			alert.showAndWait();
+			return this;
+		}
+		String tbd_username = this.main_controller.admin_controller.user_listview.getSelectionModel().getSelectedItem();
+		this.admin.deleteuser(tbd_username);
+		try {
+			Admin.writeApp(this.admin);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			this.main_controller.primaryStage.close();
+		}
+		//removing username from the observable list
+		for(int i = 0; i < obs.size(); i++) {
+			if(obs.get(i).compareTo(tbd_username) == 0) {
+				obs.remove(i);
+			}
+		}
+		return this;		
+		//DO NOT alLOW space as username?? or are there other restrictions??
 	}
 	
 	public static AdminState getInstance() {

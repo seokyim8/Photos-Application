@@ -52,6 +52,9 @@ public class LoginState extends PhotosState{
 			this.main_controller.primaryStage.setScene(this.main_controller.admin_scene);
 			return temp;
 		}
+		if(typed_username.compareTo("stock") == 0) {//stock case
+			//TODO: fill in 
+		}
 
 		for(int i = 0; i < this.admin.users.size(); i++) {//normal user case
 			if(this.admin.users.get(i).username.compareTo(typed_username) == 0) {
