@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Album implements Serializable{
 	/**
@@ -28,10 +29,13 @@ public class Album implements Serializable{
 	 * Adds photo to the Album instance.
 	 * 
 	 * @param filePath
-	 * @return	0 if successful, 1 if filePath was invalid, 2 if photo already exists 
+	 * @return	0 if successful, 1 if filePath is invalid, 2 if photo already exists, 3 if file path does not specify an image file
 	 * @throws IOException 
 	 */
 	public int addPhoto(String filePath) throws IOException {
+		if(!isImageExtention(filePath)) {
+			return 3;
+		}
 		for(int i = 0; i < this.photos.size(); i++) {
 			if(this.photos.get(i).filePath.compareTo(filePath)== 0) {
 				return 2;
@@ -45,8 +49,7 @@ public class Album implements Serializable{
 		this.photos.add(photo);
 		this.num_of_photos++;
 		
-		if(this.date_range == null) {
-			this.date_range = new LocalDateTime[2];
+		if(this.date_range[0] == null && this.date_range[1] == null) {
 			this.date_range[0] = photo.datetime;
 			this.date_range[1] = photo.datetime;
 		}
@@ -98,5 +101,18 @@ public class Album implements Serializable{
 		}
 		this.name = name;
 		return true;
+	}
+	private boolean isImageExtention(String filePath) {
+		String[] arr = filePath.split(Pattern.quote("."));
+		String extension = arr[arr.length-1];
+		extension.toLowerCase();
+		
+		String[] image_extensions = {"bmp","gif","jpg","jpeg","png"};
+		for(int i = 0; i < image_extensions.length; i++) {
+			if(extension.compareTo(image_extensions[i]) == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

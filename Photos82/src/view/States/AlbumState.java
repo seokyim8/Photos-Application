@@ -3,6 +3,7 @@ package view.States;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -55,9 +56,6 @@ public class AlbumState extends PhotosState{
 				}
 				else {
 					int index = Integer.parseInt(album_index);
-					
-					System.out.println(index+"");
-					
 					Photo temp_photo = album.photos.get(index);
 					String filePath = temp_photo.filePath;
 					try {
@@ -71,8 +69,12 @@ public class AlbumState extends PhotosState{
 					for(int i = 0; i < temp_photo.tags.size(); i++) {
 						tags_list_string += temp_photo.tags.get(i)+ " ";
 					}
+					String refined_datetime = refineLocalDateTime(temp_photo.datetime);
 					setText("Caption: " + temp_photo.caption + "\nDate-time: " + 
-					temp_photo.datetime.toString() + "\nTags " + tags_list_string);
+							refined_datetime + "\nTags: " + tags_list_string);
+					imageview.setPreserveRatio(true);
+					imageview.setFitHeight(150);
+					imageview.setFitWidth(190);
 					setGraphic(imageview);
 				}
 			}
@@ -174,17 +176,30 @@ public class AlbumState extends PhotosState{
 			fromDate = "none";
 		}
 		else {
-			fromDate = this.album.date_range[0].toString();
+			fromDate = this.album.date_range[0].toLocalDate().toString();
 		}
 		if(this.album.date_range[1] == null) {
 			toDate= "none";
 		}
 		else {
-			toDate = this.album.date_range[1].toString();
+			toDate = this.album.date_range[1].toLocalDate().toString();
 		}
 		String album_info = "Name: " + this.album.name + "\nNumber of Photos: " +
 		this.album.num_of_photos + "\nRange of Dates: " + fromDate + " to " + toDate;
 		this.main_controller.album_controller.album_info_text.setText(album_info);
+	}
+	private String refineLocalDateTime(LocalDateTime datetime) {//try testing in the morning (or change local time)
+		String[] split_arr1 = datetime.toString().split("T");
+		String[] split_arr2 = split_arr1[1].split(":");
+		int hour = Integer.parseInt(split_arr2[0]);
+		String minute = split_arr2[1];
+		String am_pm = "am";
+		
+		if(hour > 12) {
+			am_pm = "pm";
+			hour -= 12;
+		}
+		return split_arr1[0] + " " + hour + ":" + minute + am_pm;
 	}
 
 }
