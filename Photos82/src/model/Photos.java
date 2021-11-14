@@ -1,7 +1,6 @@
 package model;
 
 
-import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

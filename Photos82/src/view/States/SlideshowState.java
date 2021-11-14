@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Admin;
@@ -31,19 +32,10 @@ public class SlideshowState extends PhotosState{
 		this.user = user;
 		this.album = album;
 		this.photo = photo;
+		this.photo_index = 0;
 		
-		if(this.album.photos.size() != 0) {
-			this.main_controller.slideshow_controller.photo_imageview = new ImageView();
-			ImageView tempImageView = this.main_controller.slideshow_controller.photo_imageview;
-			try {
-				tempImageView.setImage(new Image(new FileInputStream(this.album.photos.get(0).filePath)));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				this.main_controller.primaryStage.close();
-			}
-			this.photo_index = 0;
-			updatePhotoInfo();
+		if(this.album.num_of_photos != 0) {
+			updatePhoto();
 		}
 		else {//no photos stored
 			resetPhotoInfo();
@@ -52,11 +44,29 @@ public class SlideshowState extends PhotosState{
 
 	@Override
 	public PhotosState processEvent(ActionEvent e) {
-		
-		
-		
-		return null;
-		
+		Button button = (Button)e.getSource();
+		if(button == this.main_controller.slideshow_controller.quit_button) {
+			this.main_controller.primaryStage.close();
+			return null;
+		}
+		if(button == this.main_controller.slideshow_controller.album_button) {
+			this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
+			AlbumState tempState = this.main_controller.album_state;
+			tempState.enter(this.admin, this.user, this.album, this.photo);
+			return tempState;
+		}
+		if(button == this.main_controller.slideshow_controller.left_button) {
+			this.photo_index -= 1;
+			if(this.photo_index < 0) {
+				this.photo_index = this.album.num_of_photos - 1;
+			}
+			updatePhoto();
+			return this;
+		}
+		//right button clicked
+		this.photo_index = (this.photo_index + 1) % this.album.num_of_photos;
+		updatePhoto();
+		return this;
 	}
 
 	public static SlideshowState getInstance() {
@@ -98,5 +108,19 @@ public class SlideshowState extends PhotosState{
 			hour -= 12;
 		}
 		return split_arr1[0] + " " + hour + ":" + minute + am_pm;
+	}
+	private void updatePhoto() {
+		ImageView temp_imageview = this.main_controller.slideshow_controller.photo_imageview;
+		try {
+			temp_imageview.setImage(new Image(new FileInputStream(this.album.photos.get(this.photo_index).filePath)));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.main_controller.primaryStage.close();
+		}
+		temp_imageview.setFitHeight(249);
+		temp_imageview.setFitWidth(350);
+		temp_imageview.setPreserveRatio(true);
+		updatePhotoInfo();
 	}
 }
