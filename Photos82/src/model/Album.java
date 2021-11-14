@@ -10,16 +10,18 @@ public class Album implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String name;
-	int num_of_photos;
-	LocalDateTime[] date_range;
-	User user;
-	ArrayList<Photo> photos;
+	public String name;
+	public int num_of_photos;
+	public LocalDateTime[] date_range;
+	public User user;
+	public ArrayList<Photo> photos;
 	
 	public Album(String name, User user) {
 		this.name = name;
 		this.user = user;
 		this.photos = new ArrayList<Photo>();
+		this.num_of_photos = 0;
+		this.date_range = new LocalDateTime[2];
 	}
 	
 	/**

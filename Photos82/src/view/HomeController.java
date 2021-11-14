@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class HomeController implements Controller{
 	public @FXML Button quit_button;
 	public @FXML TextField create_album_textfield;
 	public @FXML ListView<String> albums_listview;
-
+	public ObservableList<String> obs;
 	
 	public void setup(MainController mc) {
 		this.main_controller = mc;

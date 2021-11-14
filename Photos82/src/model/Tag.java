@@ -7,9 +7,9 @@ public class Tag implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String name;
-	String value;
-	Photo photo;
+	public String name;
+	public String value;
+	public Photo photo;
 	
 	public Tag(String name, String value, Photo photo) {
 		this.name = name;

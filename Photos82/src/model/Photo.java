@@ -14,11 +14,11 @@ public class Photo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String filePath;
-	String caption;
-	LocalDateTime datetime;
-	ArrayList<Album> albums;
-	ArrayList<Tag> tags;
+	public String filePath;
+	public String caption;
+	public LocalDateTime datetime;
+	public ArrayList<Album> albums;
+	public ArrayList<Tag> tags;
 	
 	private Photo(String filePath, Album album) throws IOException {
 		this.filePath = filePath;
