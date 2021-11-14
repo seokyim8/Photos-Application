@@ -78,7 +78,6 @@ public class HomeState extends PhotosState{
 				return this;
 			}
 			else {//created album
-				System.out.println("presssssed");
 				Album temp = this.user.albums.get(this.user.albums.size()-1);
 				ObservableList<String> obs = this.main_controller.home_controller.obs;
 				//taking care of case where album has no photos and thus no date range 
