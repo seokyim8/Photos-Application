@@ -60,4 +60,42 @@ public class Photo implements Serializable{
 	public void modifyCaption(String caption) {
 		this.caption = caption;
 	}
+	public int copyToAlbum(String album_name, ArrayList<Album> given_albums) {
+		for(int i = 0; i < given_albums.size(); i++) {
+			if(given_albums.get(i).name.compareTo(album_name) == 0) {
+				Album temp = given_albums.get(i);
+				for(int j = 0; j < temp.photos.size(); j++) {
+					if(temp.photos.get(j).equals(this)) {
+						return 1;
+					}
+				}
+				temp.addPhotoThroughLink(this);
+				this.albums.add(temp);
+				return 0;
+			}
+		}
+		return 2;
+	}
+	public int moveToAlbum(String album_name, Album tbr_album, ArrayList<Album> given_albums) {
+		for(int i = 0; i < given_albums.size(); i++) {
+			if(given_albums.get(i).name.compareTo(album_name) == 0) {
+				Album temp = given_albums.get(i);
+				for(int j = 0; j < temp.photos.size(); j++) {
+					if(temp.photos.get(j).equals(this)) {
+						return 1;
+					}
+				}
+				
+				temp.addPhotoThroughLink(this);
+				this.albums.add(temp);
+				
+				tbr_album.photos.remove(this);
+				tbr_album.num_of_photos--;
+				tbr_album.updateDateRange();
+				this.albums.remove(tbr_album);
+				return 0;
+			}
+		}
+		return 2;
+	}
 }

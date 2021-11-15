@@ -57,6 +57,9 @@ public class AlbumState extends PhotosState{
 				}
 				else {
 					int index = Integer.parseInt(album_index);
+					if(album.photos.size() == 0) {//HOW DOES THIS FIX THE ISSUES THAT I HAD BEFORE???
+						return;
+					}
 					Photo temp_photo = album.photos.get(index);
 					String filePath = temp_photo.filePath;
 					try {
@@ -121,6 +124,18 @@ public class AlbumState extends PhotosState{
 			return tempState;
 		}
 		if(button == this.main_controller.album_controller.edit_photo_button) {
+			if(this.main_controller.album_controller.photos_list.getSelectionModel().isEmpty()) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: no photo selectded");
+				alert.setContentText("Error: No photo selected. Please select "
+						+ "a photo in the list that you want to edit.");
+				alert.showAndWait();
+				return this;
+			}
+			int index = this.main_controller.album_controller.photos_list.getSelectionModel().getSelectedIndex();
+			this.photo = this.album.photos.get(index);
 			this.main_controller.primaryStage.setScene(this.main_controller.editphoto_scene);
 			EditPhotoState tempState = this.main_controller.editphoto_state;
 			tempState.enter(this.admin, this.user, this.album, this.photo);

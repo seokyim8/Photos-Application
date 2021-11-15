@@ -50,9 +50,9 @@ public class SlideshowState extends PhotosState{
 			return null;
 		}
 		if(button == this.main_controller.slideshow_controller.album_button) {
-			this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
 			AlbumState tempState = this.main_controller.album_state;
 			tempState.enter(this.admin, this.user, this.album, this.photo);
+			this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
 			return tempState;
 		}
 		if(button == this.main_controller.slideshow_controller.left_button) {

@@ -39,8 +39,10 @@ public class AddPhotoState extends PhotosState{
 			return null;
 		}
 		if(button == this.main_controller.addphoto_controller.cancel_button) {
+			AlbumState tempState = this.main_controller.album_state;
+			tempState.enter(this.admin, this.user, this.album, this.photo);
 			this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
-			return this.main_controller.album_state;
+			return tempState;
 		}
 		//add button clicked
 		String filePath = this.main_controller.addphoto_controller.filepath_textfield.getText();
@@ -93,10 +95,9 @@ public class AddPhotoState extends PhotosState{
 			e1.printStackTrace();
 			this.main_controller.primaryStage.close();
 		}
-		
-		this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
 		AlbumState tempState = this.main_controller.album_state;
 		tempState.enter(this.admin, this.user, this.album, this.photo);
+		this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
 		return tempState;
 	}
 	public static AddPhotoState getInstance() {

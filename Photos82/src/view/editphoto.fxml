@@ -34,9 +34,9 @@
       </Text>
       <TableView fx:id="tags_tableview" layoutX="338.0" layoutY="48.0" prefHeight="142.0" prefWidth="246.0">
         <columns>
-          <TableColumn prefWidth="75.0" />
-          <TableColumn prefWidth="75.0" text="Type" />
-            <TableColumn prefWidth="75.0" text="Value" />
+            <TableColumn fx:id="button_column" prefWidth="75.0" />
+          <TableColumn fx:id="type_column" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="value_column" prefWidth="75.0" text="Value" />
         </columns>
       </TableView>
       <Button fx:id="add_tag_button" layoutX="328.0" layoutY="213.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="69.0" text="Add Tag" />

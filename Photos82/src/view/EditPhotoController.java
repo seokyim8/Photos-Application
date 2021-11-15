@@ -1,11 +1,17 @@
 package view;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import model.Tag;
 
 public class EditPhotoController implements Controller{
 	MainController main_controller;
@@ -24,10 +30,19 @@ public class EditPhotoController implements Controller{
 	public @FXML TextField tag_name_textfield;
 	public @FXML TextField tag_value_textfield;
 	public @FXML TextField to_album_textfield;
-	public @FXML TableView<String> tags_tableview;
-
+	public @FXML TableView<Tag> tags_tableview;
+	public @FXML TableColumn<Tag,String> type_column;
+	public @FXML TableColumn<Tag,String> value_column;
+	public @FXML TableColumn<Tag,Tag> button_column;
+	public @FXML ImageView photo_imageview;
+	public @FXML ObservableList<Tag> obs;
+	
 	public void setup(MainController mc) {
 		this.main_controller = mc;
+		type_column.setCellValueFactory(new PropertyValueFactory<>("name"));
+		value_column.setCellValueFactory(new PropertyValueFactory<>("value"));
+		button_column.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+
 	}
 	@FXML
 	private void processEvent(ActionEvent e) {
