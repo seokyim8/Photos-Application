@@ -46,6 +46,20 @@ public class Album implements Serializable{
 			return 1;
 		}
 		
+		//check whether there is the same photo in another album. If so, use addPhotoThroughLink
+		for(int i = 0; i < this.user.albums.size(); i++) {
+			Album temp = this.user.albums.get(i);
+			if(temp.equals(this)) {
+				continue;
+			}
+			for(int j = 0; j < temp.photos.size(); j++) {
+				if(temp.photos.get(j).filePath.compareTo(filePath) == 0) {
+					this.addPhotoThroughLink(temp.photos.get(j));
+					return 0;
+				}
+			}
+		}
+		
 		this.photos.add(photo);
 		this.num_of_photos++;
 		
@@ -132,5 +146,13 @@ public class Album implements Serializable{
 			this.date_range[0] = min;
 			this.date_range[1] = max;
 		}
+	}
+	public ArrayList<Photo> searchByDate(String fromDate, String toDate){
+		//TODO:
+		return null;
+	}
+	public ArrayList<Photo> searchByTags(String tag1_name, String tag1_val, String tag2_name, String tag2_val, boolean isAnd){
+		//TODO:
+		return null;
 	}
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import model.Photo;
 
 public class AlbumController implements Controller{
 	MainController main_controller;
@@ -21,8 +22,8 @@ public class AlbumController implements Controller{
 	public @FXML Button quit_button;
 	public @FXML TextField rename_album_textfield;
 	public @FXML Text album_info_text;
-	public @FXML ListView<String> photos_list;
-	public ObservableList<String> obs;
+	public @FXML ListView<Photo> photos_list;
+	public ObservableList<Photo> obs;
 	
 	
 	public void setup(MainController mc) {

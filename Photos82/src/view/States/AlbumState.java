@@ -39,47 +39,45 @@ public class AlbumState extends PhotosState{
 		this.album = album;
 		this.photo = photo;
 		
-		this.main_controller.album_controller.obs = FXCollections.observableArrayList();
-		ObservableList<String> obs = this.main_controller.album_controller.obs;
-		for(int i = 0; i < this.album.photos.size(); i++) {
-			obs.add(i+"");
+		if(this.main_controller.album_controller.obs == null) {
+			this.main_controller.album_controller.obs = FXCollections.observableArrayList();
 		}
-		this.main_controller.album_controller.photos_list.setItems(obs);
-		ListView<String> listview = this.main_controller.album_controller.photos_list;
-		listview.setCellFactory(p -> new ListCell<String>() {
+		else {
+			this.main_controller.album_controller.obs.clear();
+		}
+		ObservableList<Photo> obs = this.main_controller.album_controller.obs;
+		for(int i = 0; i < this.album.photos.size(); i++) {
+			obs.add(this.album.photos.get(i));
+		}
+		ListView<Photo> listview = this.main_controller.album_controller.photos_list;
+		listview.setCellFactory(p -> new ListCell<Photo>() {
 			private ImageView imageview = new ImageView();
 			
-			public void updateItem(String album_index, boolean empty) {
-				super.updateItem(album_index, empty);
-				if(empty) {
+			public void updateItem(Photo photo, boolean empty) {
+				super.updateItem(photo, empty);
+				if(empty || photo == null) {
 					setText(null);
 					setGraphic(null);
 				}
 				else {
-					int index = Integer.parseInt(album_index);
-					if(album.photos.size() == 0) {//HOW DOES THIS FIX THE ISSUES THAT I HAD BEFORE???
-						return;
-					}
-					Photo temp_photo = album.photos.get(index);
-					String filePath = temp_photo.filePath;
+					String filePath = photo.filePath;
 					try {
 						imageview.setImage(new Image(new FileInputStream(filePath)));
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 						main_controller.primaryStage.close();
 					}
 					String tags_list_string = "";
-					for(int i = 0; i < temp_photo.tags.size(); i++) {
-						if(i == temp_photo.tags.size()-1) {
-							tags_list_string += temp_photo.tags.get(i);
+					for(int i = 0; i < photo.tags.size(); i++) {
+						if(i == photo.tags.size()-1) {
+							tags_list_string += photo.tags.get(i);
 						}
 						else {
-							tags_list_string += temp_photo.tags.get(i)+ ", ";
+							tags_list_string += photo.tags.get(i)+ ", ";
 						}
 					}
-					String refined_datetime = refineLocalDateTime(temp_photo.datetime);
-					setText("Caption: " + temp_photo.caption + "\nDate-time: " + 
+					String refined_datetime = refineLocalDateTime(photo.datetime);
+					setText("Caption: " + photo.caption + "\nDate-time: " + 
 							refined_datetime + "\nTags: " + tags_list_string);
 					imageview.setPreserveRatio(true);
 					imageview.setFitHeight(150);
@@ -88,7 +86,7 @@ public class AlbumState extends PhotosState{
 				}
 			}
 		});
-		
+		this.main_controller.album_controller.photos_list.setItems(obs);
 		updateAlbumInfo();
 	}
 
@@ -106,9 +104,9 @@ public class AlbumState extends PhotosState{
 			return tempState;
 		}
 		if(button == this.main_controller.album_controller.home_button) {
-			this.main_controller.primaryStage.setScene(this.main_controller.home_scene);
 			HomeState tempState = this.main_controller.home_state;
 			tempState.enter(this.admin, this.user, this.album, this.photo);
+			this.main_controller.primaryStage.setScene(this.main_controller.home_scene);
 			return tempState;
 		}
 		if(button == this.main_controller.album_controller.slideshow_button) {

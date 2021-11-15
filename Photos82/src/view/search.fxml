@@ -23,9 +23,9 @@
       <TextField fx:id="from_textfield" layoutX="445.0" layoutY="57.0" promptText="From (ex: 2021-9-6)" />
       <TextField fx:id="to_textfield" layoutX="445.0" layoutY="90.0" promptText="To" />
       <Button fx:id="search_by_date_button" layoutX="475.0" layoutY="126.0" mnemonicParsing="false" onAction="#processEvent" text="Search By Date" />
-      <ComboBox fx:id="tag_name1_combobox" layoutX="416.0" layoutY="187.0" prefHeight="26.0" prefWidth="101.0" promptText="Tag name" />
+      <ComboBox fx:id="tag_name1_combobox" layoutX="410.0" layoutY="187.0" prefHeight="26.0" prefWidth="113.0" promptText="Tag name" />
       <TextField fx:id="tag_value1_textfield" layoutX="526.0" layoutY="187.0" prefHeight="26.0" prefWidth="113.0" promptText="value" />
-      <ComboBox fx:id="tag_name2_combobox" layoutX="416.0" layoutY="256.0" prefHeight="26.0" prefWidth="101.0" promptText="Tag name" />
+      <ComboBox fx:id="tag_name2_combobox" layoutX="410.0" layoutY="256.0" prefHeight="26.0" prefWidth="113.0" promptText="Tag name" />
       <TextField fx:id="tag_value2_textfield" layoutX="526.0" layoutY="256.0" prefHeight="26.0" prefWidth="113.0" promptText="value" />
       <ComboBox fx:id="and_or_combobox" layoutX="473.0" layoutY="221.0" prefHeight="26.0" prefWidth="101.0" promptText="AND/OR" />
       <Button fx:id="search_by_tags_button" layoutX="474.0" layoutY="294.0" mnemonicParsing="false" onAction="#processEvent" text="Search By Tags" />
