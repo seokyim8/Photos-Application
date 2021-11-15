@@ -27,4 +27,23 @@ public class Tag implements Serializable{
 	public String toString() {
 		return this.name + ": " + this.value;
 	}
+	public boolean equals(Object o) {
+		if(o != null && o instanceof Tag) {
+			Tag tag = (Tag)o;
+			if(this.name == null && tag.name != null) {
+				return false;
+			}
+			if(this.name != null && tag.name == null) {
+				return false;
+			}
+			if(this.value == null && tag.value != null) {
+				return false;
+			}
+			if(this.value != null && tag.value == null) {
+				return false;
+			}
+			return this.name.compareTo(tag.name) == 0 && this.value.compareTo(tag.value) == 0;
+		}
+		return false;
+	}
 }

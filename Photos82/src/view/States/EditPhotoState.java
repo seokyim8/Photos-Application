@@ -69,7 +69,17 @@ public class EditPhotoState extends PhotosState{
 		if(button == this.main_controller.editphoto_controller.add_tag_button) {
 			String name = this.main_controller.editphoto_controller.tag_name_textfield.getText();
 			String value = this.main_controller.editphoto_controller.tag_value_textfield.getText();
-			if(!this.photo.addTag(name, value)) {//failed to add tag
+			if(name.trim().compareTo("") == 0 || value.trim().compareTo("") == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: invalid tag input");
+				alert.setContentText("Error: Invalid tag input. Please provide "
+						+ "a tag name and a tag value that are empty or are only spaces.");
+				alert.showAndWait();
+				return this;
+			}
+			if(!this.photo.addTag(name.trim(), value.trim())) {//failed to add tag
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
 				alert.setResizable(false);
