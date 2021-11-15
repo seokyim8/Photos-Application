@@ -75,7 +75,7 @@ public class EditPhotoState extends PhotosState{
 				alert.setResizable(false);
 				alert.setHeaderText("Error: invalid tag input");
 				alert.setContentText("Error: Invalid tag input. Please provide "
-						+ "a tag name and a tag value that are empty or are only spaces.");
+						+ "a tag name and a tag value that are not empty or are not only spaces.");
 				alert.showAndWait();
 				return this;
 			}

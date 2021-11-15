@@ -70,7 +70,6 @@ public class Photo implements Serializable{
 					}
 				}
 				temp.addPhotoThroughLink(this);
-				this.albums.add(temp);
 				return 0;
 			}
 		}
@@ -87,7 +86,6 @@ public class Photo implements Serializable{
 				}
 				
 				temp.addPhotoThroughLink(this);
-				this.albums.add(temp);
 				
 				tbr_album.photos.remove(this);
 				tbr_album.num_of_photos--;

@@ -1,6 +1,7 @@
 package view;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ public class SearchController implements Controller{
 	public @FXML Button search_by_tags_button;
 	public @FXML Button clear_button;
 	public @FXML ListView<Photo> photos_listview;
+	public @FXML ObservableList<Photo> obs;
 	public @FXML TextField from_textfield;
 	public @FXML TextField to_textfield;
 	public @FXML TextField tag_value1_textfield;

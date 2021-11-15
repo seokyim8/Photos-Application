@@ -2,7 +2,6 @@ package model;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -94,6 +93,7 @@ public class Album implements Serializable{
 				this.date_range[1] = given.datetime;
 			}
 		}
+		given.albums.add(this);
 	}
 	public boolean deletePhoto(int index) {
 		if(index < 0 || index >= this.photos.size()) {
@@ -147,59 +147,5 @@ public class Album implements Serializable{
 			this.date_range[0] = min;
 			this.date_range[1] = max;
 		}
-	}
-	public ArrayList<Photo> searchByDate(String fromDate, String toDate){
-		ArrayList<Photo> tbr = new ArrayList<Photo>();
-		for(int i = 0; i < this.user.albums.size(); i++) {
-			Album album = this.user.albums.get(i);
-			for(int j = 0; j < album.photos.size(); j++) {
-				Photo photo = album.photos.get(j);
-				if(!tbr.contains(photo)) {
-					LocalDate from_date = LocalDate.parse(fromDate);
-					LocalDate to_date = LocalDate.parse(toDate);
-					if(photo.datetime.toLocalDate().isAfter(from_date)
-							&& photo.datetime.toLocalDate().isBefore(to_date)) {
-						tbr.add(photo);
-					}
-				}
-			}
-		}
-		return tbr;
-	}
-	public ArrayList<Photo> searchByTags(String tag1_name, String tag1_val, String tag2_name, String tag2_val, boolean isAnd){
-		Tag t1 = null, t2 = null;
-		if(tag1_name.compareTo("") != 0 && tag1_val.compareTo("") != 0) {
-			t1 = new Tag(tag1_name,tag1_val,null);
-		}
-		if(tag2_name.compareTo("") != 0 && tag2_val.compareTo("") != 0) {
-			t2 = new Tag(tag2_name,tag2_val,null);
-		}
-		ArrayList<Tag> tag_arr = new ArrayList<>();
-		if(t1 != null) {
-			tag_arr.add(t1);
-		}
-		if(t2 != null) {
-			tag_arr.add(t2);
-		}
-		
-			
-		ArrayList<Photo> tbr = new ArrayList<Photo>();
-		for(int i = 0; i < this.user.albums.size(); i++) {
-			Album album = this.user.albums.get(i);
-			for(int j = 0; j < album.photos.size(); j++) {
-				Photo photo = album.photos.get(j);
-				if(!tbr.contains(photo)) {
-					if(isAnd) {
-						if(t1 != null && photo.tags.contains(t1)) {
-							
-						}
-					}
-					else {//isOr
-						
-					}
-				}
-			}
-		}
-		return tbr;
 	}
 }
