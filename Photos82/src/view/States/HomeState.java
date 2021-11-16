@@ -71,8 +71,8 @@ public class HomeState extends PhotosState{
 			return tempState;
 		}
 		if(button == this.main_controller.home_controller.add_tags_button) {
-			this.main_controller.primaryStage.setScene(this.main_controller.addtag_scene);
-			AddTagState tempState = this.main_controller.addtag_state;
+			this.main_controller.primaryStage.setScene(this.main_controller.edittag_scene);
+			EditTagState tempState = this.main_controller.edittag_state;
 			tempState.enter(this.admin,this.user,this.album,this.photo);
 			return tempState;
 		}

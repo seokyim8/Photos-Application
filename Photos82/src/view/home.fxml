@@ -22,6 +22,6 @@
       <Button fx:id="delete_album_button" layoutX="433.0" layoutY="273.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="146.0" text="Delete Album" />
       <Button fx:id="log_out_button" layoutX="433.0" layoutY="311.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="146.0" text="Log Out" />
       <Button fx:id="quit_button" layoutX="433.0" layoutY="353.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="146.0" text="Quit" />
-      <Button fx:id="add_tags_button" layoutX="433.0" layoutY="157.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="146.0" text="Add Tag Types" />
+      <Button fx:id="add_tags_button" layoutX="433.0" layoutY="157.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="146.0" text="Edit Tag Types" />
    </children>
 </AnchorPane>

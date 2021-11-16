@@ -30,8 +30,8 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 	public Scene addphoto_scene;
 	public EditPhotoController editphoto_controller;
 	public Scene editphoto_scene;
-	public AddTagController addtag_controller;
-	public Scene addtag_scene;
+	public EditTagController edittag_controller;
+	public Scene edittag_scene;
 	
 	//states
 	public PhotosState current_state;
@@ -43,7 +43,7 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 	public SlideshowState slideshow_state;
 	public AddPhotoState addphoto_state;
 	public EditPhotoState editphoto_state;
-	public AddTagState addtag_state;
+	public EditTagState edittag_state;
 	
 	
 	public void start(Stage primaryStage) throws IOException {
@@ -117,11 +117,11 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 		editphoto_scene = scene;
 		editphoto_controller  = loader.getController();
 		
-		loader = new FXMLLoader(getClass().getResource("/view/addtag.fxml"));
+		loader = new FXMLLoader(getClass().getResource("/view/edittag.fxml"));
 		root = loader.load();
 		scene = new Scene(root);
-		addtag_scene = scene;
-		addtag_controller  = loader.getController();
+		edittag_scene = scene;
+		edittag_controller  = loader.getController();
 
 		login_controller.setup(this);
 		admin_controller.setup(this);
@@ -131,7 +131,7 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 		slideshow_controller.setup(this);
 		addphoto_controller.setup(this);
 		editphoto_controller.setup(this);
-		addtag_controller.setup(this);
+		edittag_controller.setup(this);
 		
 		//setting up states
 		this.login_state = LoginState.getInstance();this.login_state.setup(this);
@@ -142,7 +142,7 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 		this.slideshow_state = SlideshowState.getInstance();this.slideshow_state.setup(this);
 		this.addphoto_state = AddPhotoState.getInstance();this.addphoto_state.setup(this);
 		this.editphoto_state = EditPhotoState.getInstance();this.editphoto_state.setup(this);
-		this.addtag_state = AddTagState.getInstance();this.addtag_state.setup(this);
+		this.edittag_state = EditTagState.getInstance();this.edittag_state.setup(this);
 		this.current_state = this.login_state;
 	}
 }

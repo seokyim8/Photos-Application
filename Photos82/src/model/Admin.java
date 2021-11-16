@@ -19,6 +19,7 @@ public class Admin implements Serializable{
 	public static final String storeFile = "admin.dat";
 	
 	public ArrayList<User> users;
+	public User stock_user;
 	
 	public Admin() {
 		this.users = new ArrayList<User>();
