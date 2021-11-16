@@ -77,6 +77,13 @@ public class EditPhotoState extends PhotosState{
 		if(button == this.main_controller.editphoto_controller.apply_button) {
 			String caption = this.main_controller.editphoto_controller.caption_textfield.getText();
 			this.photo.modifyCaption(caption);
+			try {
+				Admin.writeApp(this.admin);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				this.main_controller.primaryStage.close();
+			}
 			updatePhotoInfo();
 			return this;
 		}
@@ -103,14 +110,24 @@ public class EditPhotoState extends PhotosState{
 				alert.showAndWait();
 				return this;
 			}
-			
-			if(!this.photo.addTag(name.trim(), value.trim())) {//failed to add tag
+			int addtag_result = this.photo.addTag(name.trim(), value.trim(),this.user);
+			if(addtag_result == 1) {//failed to add tag
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
 				alert.setResizable(false);
 				alert.setHeaderText("Error: duplicate tag exists");
 				alert.setContentText("Error: Duplicate tag exists. Please provide "
 						+ "a tag name and value combination that is unique.");
+				alert.showAndWait();
+				return this;
+			}
+			if(addtag_result == 2) {//failed to add tag
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: tag multiplicity inconsistency");
+				alert.setContentText("Error: The selected tag type only supports a single value. Please "
+						+ "select a different tag type, or simply delete the previous tag value associated with this tag type.");
 				alert.showAndWait();
 				return this;
 			}
@@ -352,7 +369,7 @@ public class EditPhotoState extends PhotosState{
 		cb1.getItems().clear();
 		cb1.getItems().add("Select");
 		for(int i = 0; i < this.user.tagnames.size(); i++) {
-			cb1.getItems().add(this.user.tagnames.get(i));
+			cb1.getItems().add(this.user.tagnames.get(i).name);
 		}
 		cb1.getSelectionModel().clearAndSelect(0);
 	}

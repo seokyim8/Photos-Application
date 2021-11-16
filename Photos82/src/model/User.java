@@ -23,7 +23,7 @@ public class User implements Serializable{
 	/**
 	 * the Arraylist of Tag that contains all the tag types for this user
 	 */
-	public ArrayList<String> tagnames;
+	public ArrayList<TagType> tagnames;
 	/**
 	 * the ArrayList of Album that contains all the albums for this user
 	 */
@@ -36,11 +36,11 @@ public class User implements Serializable{
 	 */
 	public User(String username) {
 		this.username = username;
-		this.tagnames = new ArrayList<String>();
+		this.tagnames = new ArrayList<TagType>();
 		this.albums = new ArrayList<Album>();
 		
-		this.tagnames.add("location");
-		this.tagnames.add("person");
+		this.addTagType("location", "single");
+		this.addTagType("person", "multiple");
 	}
 	/**
 	 * Creates an album using the given album name.
@@ -82,7 +82,7 @@ public class User implements Serializable{
 	 */
 	public boolean deleteTag(String name) {
 		for(int i = 0; i < this.tagnames.size(); i++) {
-			if(this.tagnames.get(i).compareTo(name) == 0) {
+			if(this.tagnames.get(i).name.compareTo(name) == 0) {
 				this.tagnames.remove(i);
 				return true;
 			}
@@ -93,15 +93,16 @@ public class User implements Serializable{
 	 * Adds a tag type to this user's ArrayList of Tags
 	 * 
 	 * @param name	tag name
+	 * @param multiplicity	the tag multiplicity
 	 * @return	true if successful, false otherwise
 	 */
-	public boolean addTagType(String name) {
+	public boolean addTagType(String name, String multiplicity) {
 		for(int i = 0; i < this.tagnames.size(); i++) {
-			if(name.compareTo(this.tagnames.get(i)) == 0) {//duplicate tag type found
+			if(name.compareTo(this.tagnames.get(i).name) == 0) {//duplicate tag type found
 				return false;
 			}
 		}
-		this.tagnames.add(name);
+		this.tagnames.add(TagType.createTagType(name, multiplicity));
 		return true;
 	}
 	/**

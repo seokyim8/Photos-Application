@@ -103,7 +103,8 @@ public class EditTagState extends PhotosState{
 			alert.showAndWait();
 			return this;
 		}
-		if(!this.user.addTagType(this.main_controller.edittag_controller.name_textfield.getText().trim())) {
+		String multiplicity = this.main_controller.edittag_controller.multiplicity_combobox.getValue();
+		if(!this.user.addTagType(this.main_controller.edittag_controller.name_textfield.getText().trim(),multiplicity)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(this.main_controller.primaryStage);
 			alert.setResizable(false);
@@ -150,12 +151,17 @@ public class EditTagState extends PhotosState{
 	 * Sets up the ComboBox for the current scene
 	 */
 	private void setUpComboBox() {
-		ComboBox<String> cb = this.main_controller.edittag_controller.tag_combobox;
-		cb.getItems().clear();
-		cb.getItems().add("Select");
+		ComboBox<String> cb1 = this.main_controller.edittag_controller.tag_combobox;
+		ComboBox<String> cb2 = this.main_controller.edittag_controller.multiplicity_combobox;
+		cb1.getItems().clear();
+		cb2.getItems().clear();
+		cb1.getItems().add("Select");
+		cb2.getItems().add("single");
+		cb2.getItems().add("multiple");
 		for(int i = 0; i< this.user.tagnames.size(); i++) {
-			cb.getItems().add(this.user.tagnames.get(i));
+			cb1.getItems().add(this.user.tagnames.get(i).name);
 		}
-		cb.getSelectionModel().clearAndSelect(0);
+		cb1.getSelectionModel().clearAndSelect(0);
+		cb2.getSelectionModel().clearAndSelect(0);
 	}
 }

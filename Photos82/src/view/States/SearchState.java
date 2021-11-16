@@ -363,11 +363,11 @@ public class SearchState extends PhotosState{
 		
 		cb1.getItems().add("Select Tag");
 		for(int i = 0; i < this.user.tagnames.size(); i++) {
-			cb1.getItems().add(this.user.tagnames.get(i));
+			cb1.getItems().add(this.user.tagnames.get(i).name);
 		}
 		cb2.getItems().add("Select Tag");
 		for(int i = 0; i < this.user.tagnames.size(); i++) {
-			cb2.getItems().add(this.user.tagnames.get(i));
+			cb2.getItems().add(this.user.tagnames.get(i).name);
 		}
 		cb3.getItems().add("and");
 		cb3.getItems().add("or");

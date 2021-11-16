@@ -74,22 +74,46 @@ public class Photo implements Serializable{
 		return null;
 	}
 	/**
-	 * Adds a tag to this photo.
+	 * Adds a tag to this photo. Assumes that the tag type/name given already exists.
 	 * 
 	 * @param name	tag name
 	 * @param value	tag value
-	 * @return	true if successful, false otherwise
+	 * @param user	the current user
+	 * @return	0 if successful, 1 if failed due to duplicate combination issue, 2 if failed due to multiplicity issue
 	 */
-	public boolean addTag(String name, String value) {
+	public int addTag(String name, String value, User user) {
 		for(int i = 0; i < this.tags.size(); i++) {
 			if(this.tags.get(i).name.compareTo(name) == 0 
 					&& this.tags.get(i).value.compareTo(value) == 0) {
-				return false;//tag name + value combination has to be unique for a photo
+				return 1;//tag name + value combination has to be unique for a photo
+			}
+		}
+		
+		String multiplicity = "";
+		for(int i = 0; i < user.tagnames.size(); i++) {
+			if(user.tagnames.get(i).name.compareTo(name) == 0) {
+				if(user.tagnames.get(i).multiplicity.compareTo("single") == 0) {
+					multiplicity = "single";
+				}
+				else {
+					multiplicity = "multiple";
+				}
+			}
+		}
+		int count = 0;
+		for(int i = 0 ; i < this.tags.size(); i++) {
+			if(this.tags.get(i).name.compareTo(name) == 0) {
+				count++;
+			}
+		}
+		if(multiplicity.compareTo("single") == 0) {
+			if(count != 0) {
+				return 2;//invalid for tag types that allow only single value
 			}
 		}
 		Tag tag = new Tag(name,value,this);
 		this.tags.add(tag);
-		return true;
+		return 0;
 	}
 	/**
 	 * Deletes a tag from the ArrayList of tags.

@@ -1,6 +1,7 @@
 package model;
 
 
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.MainController;
@@ -27,6 +28,7 @@ public class Photos extends Application{
 	public static void main(String[] args) {
 		//when wanting to start with new data, uncomment the following codeblock and then run the program
 		//afterwards, quit the program and comment out the codeblock and run the program
+		
 //		Admin admin = new Admin();
 //		admin.addUser("stock");
 //		User user = admin.users.get(0);
@@ -49,7 +51,7 @@ public class Photos extends Application{
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
-		//
+		
 		
 		launch(args);
 	}

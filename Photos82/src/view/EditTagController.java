@@ -43,6 +43,11 @@ public class EditTagController {
 	 */
 	public @FXML TextField name_textfield;
 	
+	/**
+	 * the multiplicity ComboBox
+	 */
+	public @FXML ComboBox<String> multiplicity_combobox;
+	
 	public void setup(MainController mc) {
 		this.main_controller = mc;
 	}
