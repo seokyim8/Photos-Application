@@ -36,6 +36,10 @@ public class HomeController implements Controller{
 	 */
 	public @FXML Button delete_album_button;
 	/**
+	 * the rename album button
+	 */
+	public @FXML Button rename_button;
+	/**
 	 * the log out button
 	 */
 	public @FXML Button log_out_button;

@@ -298,6 +298,9 @@ public class EditPhotoState extends PhotosState{
 			am_pm = "pm";
 			hour -= 12;
 		}
+		if(hour == 0) {
+			hour = 12;
+		}
 		return split_arr1[0] + " " + hour + ":" + minute + am_pm;
 	}
 	/**

@@ -46,27 +46,7 @@ public class HomeState extends PhotosState{
 		this.album = album;
 		this.photo = photo;
 		
-		this.main_controller.home_controller.obs = FXCollections.observableArrayList();
-		ObservableList<String> obs = this.main_controller.home_controller.obs;
-		for(int i = 0; i < this.user.albums.size(); i++) {
-			Album temp = this.user.albums.get(i);
-			String fromDate, toDate;
-			if(temp.date_range[0] == null) {
-				fromDate = "none";
-			}
-			else {
-				fromDate = temp.date_range[0].toLocalDate().toString();
-			}
-			if(temp.date_range[1] == null) {
-				toDate = "none";
-			}
-			else {
-				toDate = temp.date_range[1].toLocalDate().toString();
-			}
-			obs.add("Album Name: " + temp.name + "\nNumber of Photos: " + temp.num_of_photos
-					+ "\nDate Range: " + fromDate + " to " + toDate);
-		}
-		this.main_controller.home_controller.albums_listview.setItems(obs);
+		updateAlbumList();
 	}
 
 	@Override
@@ -147,6 +127,49 @@ public class HomeState extends PhotosState{
 				return this;
 			}
 		}
+		if(button == this.main_controller.home_controller.rename_button) {
+			Alert confirmation = new Alert(AlertType.CONFIRMATION);
+			confirmation.initOwner(this.main_controller.primaryStage);
+			confirmation.setResizable(false);
+			confirmation.setHeaderText("Are you sure you want to rename this album?");
+			Optional<ButtonType> result = confirmation.showAndWait();
+			if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+				return this;
+			}
+			this.album = this.user.albums.get(this.main_controller.home_controller.albums_listview.getSelectionModel().getSelectedIndex());
+			String name = this.main_controller.home_controller.create_album_textfield.getText();
+			if(name.trim().length()==0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: invalid album name");
+				alert.setContentText("Error: Invalid album name. Please provide "
+						+ "a valid album name for renaming (cannot be empty or spaces).");
+				alert.showAndWait();
+				return this;
+			}
+			if(!this.album.rename(name)) {//renaming failed
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: duplicate album name found");
+				alert.setContentText("Error: Duplicate album name found. Please provide "
+						+ "an album name that does not already exist in the album list.");
+				alert.showAndWait();
+				return this;
+			}
+			else {//renamed album
+				try { 
+					Admin.writeApp(this.admin);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					this.main_controller.primaryStage.close();
+				}
+				updateAlbumList();
+				return this;
+			}
+		}
 		if(button == this.main_controller.home_controller.search_photos_button) {
 			SearchState tempState = this.main_controller.search_state;
 			tempState.enter(this.admin, this.user, this.album, this.photo);
@@ -215,6 +238,32 @@ public class HomeState extends PhotosState{
 			HomeState.currentState = new HomeState();
 		}
 		return HomeState.currentState;
+	}
+	/**
+	 * Updates the ListView of Albums
+	 */
+	private void updateAlbumList() {
+		this.main_controller.home_controller.obs = FXCollections.observableArrayList();
+		ObservableList<String> obs = this.main_controller.home_controller.obs;
+		for(int i = 0; i < this.user.albums.size(); i++) {
+			Album temp = this.user.albums.get(i);
+			String fromDate, toDate;
+			if(temp.date_range[0] == null) {
+				fromDate = "none";
+			}
+			else {
+				fromDate = temp.date_range[0].toLocalDate().toString();
+			}
+			if(temp.date_range[1] == null) {
+				toDate = "none";
+			}
+			else {
+				toDate = temp.date_range[1].toLocalDate().toString();
+			}
+			obs.add("Album Name: " + temp.name + "\nNumber of Photos: " + temp.num_of_photos
+					+ "\nDate Range: " + fromDate + " to " + toDate);
+		}
+		this.main_controller.home_controller.albums_listview.setItems(obs);
 	}
 
 }

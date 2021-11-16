@@ -164,6 +164,16 @@ public class AlbumState extends PhotosState{
 			}
 			
 			String name = this.main_controller.album_controller.rename_album_textfield.getText();
+			if(name.trim().length()==0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: invalid album name");
+				alert.setContentText("Error: Invalid album name. Please provide "
+						+ "a valid album name for renaming.");
+				alert.showAndWait();
+				return this;
+			}
 			if(!this.album.rename(name)) {//renaming failed
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
@@ -265,6 +275,9 @@ public class AlbumState extends PhotosState{
 		if(hour > 12) {
 			am_pm = "pm";
 			hour -= 12;
+		}
+		if(hour == 0) {
+			hour = 12;
 		}
 		return split_arr1[0] + " " + hour + ":" + minute + am_pm;
 	}
