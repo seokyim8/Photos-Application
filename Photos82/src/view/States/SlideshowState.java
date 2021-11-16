@@ -149,8 +149,8 @@ public class SlideshowState extends PhotosState{
 			temp_imageview.setImage(new Image(new FileInputStream(this.album.photos.get(this.photo_index).filePath)));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			this.main_controller.primaryStage.close();
+			updatePhotoInfo();
+			return;
 		}
 		temp_imageview.setFitHeight(249);
 		temp_imageview.setFitWidth(350);

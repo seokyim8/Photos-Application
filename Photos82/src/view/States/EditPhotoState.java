@@ -270,8 +270,8 @@ public class EditPhotoState extends PhotosState{
 			temp_imageview.setImage(new Image(new FileInputStream(this.photo.filePath)));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			this.main_controller.primaryStage.close();
+			updatePhotoInfo();
+			return;
 		}
 		temp_imageview.setFitHeight(190);
 		temp_imageview.setFitWidth(288);

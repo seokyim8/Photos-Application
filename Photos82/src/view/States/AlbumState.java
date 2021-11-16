@@ -78,8 +78,8 @@ public class AlbumState extends PhotosState{
 					try {
 						imageview.setImage(new Image(new FileInputStream(filePath)));
 					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-						main_controller.primaryStage.close();
+						setText("image location has been modified");
+						return;
 					}
 					String tags_list_string = "";
 					for(int i = 0; i < photo.tags.size(); i++) {
