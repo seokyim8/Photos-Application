@@ -25,6 +25,7 @@ public class SearchController implements Controller{
 	public @FXML TextField to_textfield;
 	public @FXML TextField tag_value1_textfield;
 	public @FXML TextField tag_value2_textfield;
+	public @FXML TextField album_name_textfield;
 	public @FXML ComboBox<String> tag_name1_combobox;
 	public @FXML ComboBox<String> tag_name2_combobox;
 	public @FXML ComboBox<String> and_or_combobox;

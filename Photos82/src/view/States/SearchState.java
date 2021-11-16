@@ -2,15 +2,18 @@ package view.States;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -157,7 +160,55 @@ public class SearchState extends PhotosState{
 			return this;
 		}
 		//clicked create album based on search button
-		return null;
+		String tbc_album = this.main_controller.search_controller.album_name_textfield.getText();
+		if(tbc_album.trim().length() == 0) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(this.main_controller.primaryStage);
+			alert.setTitle("Error: empty/invalid album name ");
+			alert.setResizable(false);
+			alert.setHeaderText("Error: Empty/invalid album name. Please type in " +
+			"an album name for the new album. The name cannot be empty or only contain spaces.");
+			alert.showAndWait();
+			return this;
+		}
+		Alert confirmation = new Alert(AlertType.CONFIRMATION);
+		confirmation.initOwner(this.main_controller.primaryStage);
+		confirmation.setResizable(false);
+		confirmation.setHeaderText("Are you sure you want to create a new album with these photos?");
+		Optional<ButtonType> result = confirmation.showAndWait();
+		if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+			return this;
+		}
+		if(!this.user.createAlbum(tbc_album.trim())) {//duplicate album name exists
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(this.main_controller.primaryStage);
+			alert.setTitle("Error: duplicate album name ");
+			alert.setResizable(false);
+			alert.setHeaderText("Error: Duplicate album name. Please type in " +
+			"an album name that does not already exist.");
+			alert.showAndWait();
+			return this;
+		}
+		//valid album name
+		Album temp_album = this.user.albums.get(this.user.albums.size()-1);
+		for(int i = 0; i < this.searched_photos.size(); i++) {
+			temp_album.addPhotoThroughLink(this.searched_photos.get(i));
+		}
+		try {
+			Admin.writeApp(this.admin);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			this.main_controller.primaryStage.close();
+		}
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initOwner(this.main_controller.primaryStage);
+		alert.setTitle("Success: creating new album based on search result");
+		alert.setResizable(false);
+		alert.setHeaderText("Success: creating new album based on search result.");
+		alert.showAndWait();
+		return this;
 	}
 	public static SearchState getInstance() {
 		if(SearchState.currentState == null) {

@@ -58,8 +58,28 @@ public class AdminState extends PhotosState{
 		}
 		if(button == this.main_controller.admin_controller.add_button) {
 			String typed_username = this.main_controller.admin_controller.add_textfield.getText();
-			if(this.admin.addUser(typed_username)) {
-				obs.add(typed_username);
+			if(typed_username.trim().length() == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: empty/invalid username");
+				alert.setContentText("Error: Empty/invalid username. Please type in "
+						+ "a username that is not empty or does not contain only spaces.");
+				alert.showAndWait();
+				return this;
+			}
+			if(typed_username.trim().compareTo("admin") == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: invalid username");
+				alert.setContentText("Error: Invalid username. Please type in "
+						+ "a username that is not \"admin\".");
+				alert.showAndWait();
+				return this;
+			}
+			if(this.admin.addUser(typed_username.trim())) {
+				obs.add(typed_username.trim());
 				try {
 					Admin.writeApp(this.admin);
 				} catch (IOException e1) {

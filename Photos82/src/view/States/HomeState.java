@@ -88,7 +88,7 @@ public class HomeState extends PhotosState{
 				alert.showAndWait();
 				return this;
 			}
-			if(!this.user.createAlbum(tbc_album)) {//cannot create album
+			if(!this.user.createAlbum(tbc_album.trim())) {//cannot create album
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
 				alert.setResizable(false);
