@@ -36,11 +36,6 @@ public class Admin implements Serializable{
 	 */
 	public ArrayList<User> users;
 	/**
-	 * the User instance for the special username "stock"
-	 */
-	public User stock_user;
-	
-	/**
 	 * the constructor
 	 */
 	public Admin() {

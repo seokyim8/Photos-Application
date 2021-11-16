@@ -80,13 +80,13 @@ public class AdminState extends PhotosState{
 				alert.showAndWait();
 				return this;
 			}
-			if(typed_username.trim().compareTo("admin") == 0 || typed_username.trim().compareTo("stock") == 0) {
+			if(typed_username.trim().compareTo("admin") == 0) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
 				alert.setResizable(false);
 				alert.setHeaderText("Error: invalid username");
 				alert.setContentText("Error: Invalid username. Please type in "
-						+ "a username that is not \"admin\" or \"stock\".");
+						+ "a username that is not \"admin\".");
 				alert.showAndWait();
 				return this;
 			}

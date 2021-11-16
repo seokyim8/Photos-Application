@@ -65,38 +65,6 @@ public class LoginState extends PhotosState{
 			this.main_controller.primaryStage.setScene(this.main_controller.admin_scene);
 			return temp;
 		}
-		if(typed_username.compareTo("stock") == 0) {//stock case
-			if(this.admin.stock_user == null) {
-				this.admin.stock_user = new User("stock");
-				this.admin.stock_user.createAlbum("stock");
-				Album temp = this.admin.stock_user.albums.get(0);
-				try {
-					temp.addPhoto("data/iphone11.jpg");
-					temp.addPhoto("data/oh_no.jpg");
-					temp.addPhoto("data/piano.jpg");
-					temp.addPhoto("data/round_glasses.jpg");
-					temp.addPhoto("data/smiling_fox.jpg");
-					temp.addPhoto("data/sunset.jpg");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					this.main_controller.primaryStage.close();
-				}
-				try {
-					Admin.writeApp(this.admin);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					this.main_controller.primaryStage.close();
-				}
-			}
-			this.user = this.admin.stock_user;
-			this.main_controller.primaryStage.setScene(this.main_controller.home_scene);
-			HomeState tempState = this.main_controller.home_state;
-			tempState.enter(this.admin, this.user, this.album, this.photo);
-			return tempState;
-		}
-
 		for(int i = 0; i < this.admin.users.size(); i++) {//normal user case
 			if(this.admin.users.get(i).username.compareTo(typed_username) == 0) {
 				this.user = this.admin.users.get(i);
