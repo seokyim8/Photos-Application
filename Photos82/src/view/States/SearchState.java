@@ -256,6 +256,7 @@ public class SearchState extends PhotosState{
 		if(this.main_controller.search_controller.obs != null) {
 			this.main_controller.search_controller.obs.clear();
 		}
+		this.searched_photos = new ArrayList<Photo>();
 		populateComboBoxes();
 	}
 	private void populateComboBoxes() {
