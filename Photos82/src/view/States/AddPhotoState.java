@@ -12,8 +12,20 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the AddPhotoController
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class AddPhotoState extends PhotosState{
+	/**
+	 * the singleton state for AddPhotostate
+	 */
 	private static AddPhotoState currentState;
+	/**
+	 * the constructor
+	 */
 	private AddPhotoState() {
 		
 	}
@@ -100,6 +112,11 @@ public class AddPhotoState extends PhotosState{
 		this.main_controller.primaryStage.setScene(this.main_controller.album_scene);
 		return tempState;
 	}
+	/**
+	 * Get the singleton state for AddPhotoState
+	 * 
+	 * @return the singleton AddPhotoState
+	 */
 	public static AddPhotoState getInstance() {
 		if(AddPhotoState.currentState == null) {
 			AddPhotoState.currentState = new AddPhotoState();

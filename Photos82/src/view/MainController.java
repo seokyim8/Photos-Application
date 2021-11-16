@@ -10,42 +10,141 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.States.*;
 
-public class MainController {//should we add Scene to UML CLASS DIAGRAM??
+/**
+ * This class is the main controller that connects all controllers and states for Photos82.
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
+public class MainController {
+	/**
+	 * the primaryStage
+	 */
 	public Stage primaryStage;
 	
 	//controllers
+
+	/**
+	 * the LoginController
+	 */
 	public LoginController login_controller;
+	/**
+	 * the scene for LoginController
+	 */
 	public Scene login_scene;
+	/**
+	 * the AdminController
+	 */
 	public AdminController admin_controller;
+	/**
+	 * the scene for AdminController
+	 */
 	public Scene admin_scene;
+	/**
+	 * the HomeController
+	 */
 	public HomeController home_controller;
+	/**
+	 * the scene for HomeController
+	 */
 	public Scene home_scene;
+	/**
+	 * the SearchController
+	 */
 	public SearchController search_controller;
+	/**
+	 * the scene for SearchController
+	 */
 	public Scene search_scene;
+	/**
+	 * the AlbumController
+	 */
 	public AlbumController album_controller;
+	/**
+	 * the scene for AlbumController
+	 */
 	public Scene album_scene;
+	/**
+	 * the SlideshowController
+	 */
 	public SlideshowController slideshow_controller;
+	/**
+	 * the scene for SlideshowController
+	 */
 	public Scene slideshow_scene;
+	/**
+	 * the AddPhotoController
+	 */
 	public AddPhotoController addphoto_controller;
+	/**
+	 * the scene for AddPhotoController
+	 */
 	public Scene addphoto_scene;
+	/**
+	 * the EditPhotoController
+	 */
 	public EditPhotoController editphoto_controller;
+	/**
+	 * the scene for EditPhotoController
+	 */
 	public Scene editphoto_scene;
+	/**
+	 * the EditTagController
+	 */
 	public EditTagController edittag_controller;
+	/**
+	 * the scene for EditTagController
+	 */
 	public Scene edittag_scene;
 	
 	//states
+	/**
+	 * the current state for the main controller
+	 */
 	public PhotosState current_state;
+	/**
+	 * the LoginState
+	 */
 	public LoginState login_state;
+	/**
+	 * the AdminState
+	 */
 	public AdminState admin_state;
+	/**
+	 * the HomeState
+	 */
 	public HomeState home_state;
+	/**
+	 * the SearchState
+	 */
 	public SearchState search_state;
+	/**
+	 * the AlbumState
+	 */
 	public AlbumState album_state;
+	/**
+	 * the SlideshowState
+	 */
 	public SlideshowState slideshow_state;
+	/**
+	 * the AddPhotoState
+	 */
 	public AddPhotoState addphoto_state;
+	/**
+	 * the EditPhotoState
+	 */
 	public EditPhotoState editphoto_state;
+	/**
+	 * the EditTagState
+	 */
 	public EditTagState edittag_state;
 	
-	
+	/**
+	 * Starts up the Photos82 GUI application.
+	 * 
+	 * @param primaryStage	the primaryStage for javafx
+	 * @throws IOException	if an input or output exception occurred
+	 */
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setOnCloseRequest(e->Platform.exit());
@@ -57,10 +156,20 @@ public class MainController {//should we add Scene to UML CLASS DIAGRAM??
 		primaryStage.show();
 	}
 	
+	/**
+	 * Takes an ActionEvent from the controllers and passes it onto its current state.
+	 * 
+	 * @param e	ActionEvent from controllers
+	 */
 	public void processEvent(ActionEvent e) {
 		this.current_state = this.current_state.processEvent(e);
 	}
 	
+	/**
+	 * Sets up all the controllers and the states needed for the javafx application.
+	 * 
+	 * @throws IOException
+	 */
 	private void setup() throws IOException {
 		//setting up controllers
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));

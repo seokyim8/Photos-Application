@@ -14,9 +14,24 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the SlideshowController.
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class SlideshowState extends PhotosState{
+	/**
+	 * the singleton SlideshowState
+	 */
 	private static SlideshowState currentState;
+	/**
+	 * the index for the current photo shown in the slide show
+	 */
 	private int photo_index;
+	/**
+	 * the constructor
+	 */
 	private SlideshowState() {
 		
 	}
@@ -69,12 +84,19 @@ public class SlideshowState extends PhotosState{
 		return this;
 	}
 
+	/**
+	 * Returns the singleton SlideshowState
+	 * @return	the singleton SlideshowState
+	 */
 	public static SlideshowState getInstance() {
 		if(SlideshowState.currentState == null) {
 			SlideshowState.currentState = new SlideshowState();
 		}
 		return SlideshowState.currentState;
 	}
+	/**
+	 * Updates the photo information for the current photo in the slideshow
+	 */
 	private void updatePhotoInfo() {
 		String caption = this.album.photos.get(photo_index).caption;
 		String tags = "";
@@ -91,11 +113,20 @@ public class SlideshowState extends PhotosState{
 		this.main_controller.slideshow_controller.date_text.setText(date);
 		this.main_controller.slideshow_controller.tags_text.setText(tags);
 	}
+	/**
+	 * Resets the Photo information for the current scene
+	 */
 	private void resetPhotoInfo() {
 		this.main_controller.slideshow_controller.caption_text.setText("");
 		this.main_controller.slideshow_controller.date_text.setText("");
 		this.main_controller.slideshow_controller.tags_text.setText("");
 	}
+	/**
+	 * Turns the given LocalDateTime instance into a proper String version
+	 * 
+	 * @param datetime	the given LocalDateTime instance
+	 * @return	A String version of datetime 
+	 */
 	private String refineLocalDateTime(LocalDateTime datetime) {//try testing in the morning (or change local time)
 		String[] split_arr1 = datetime.toString().split("T");
 		String[] split_arr2 = split_arr1[1].split(":");
@@ -109,6 +140,9 @@ public class SlideshowState extends PhotosState{
 		}
 		return split_arr1[0] + " " + hour + ":" + minute + am_pm;
 	}
+	/**
+	 * Updates the currently showed photo in the slide show
+	 */
 	private void updatePhoto() {
 		ImageView temp_imageview = this.main_controller.slideshow_controller.photo_imageview;
 		try {

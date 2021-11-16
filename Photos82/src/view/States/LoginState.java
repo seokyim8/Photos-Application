@@ -12,8 +12,20 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the LoginController.
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class LoginState extends PhotosState{
+	/**
+	 * the singleton LoginState
+	 */
 	private static LoginState currentState;
+	/**
+	 * the constructor
+	 */
 	private LoginState() {
 		
 	}
@@ -105,6 +117,10 @@ public class LoginState extends PhotosState{
 		
 		return this;
 	}
+	/**
+	 * Returns the singleton LoginState
+	 * @return	the singleton LoginState
+	 */
 	public static LoginState getInstance() {
 		if(LoginState.currentState == null) {
 			LoginState.currentState = new LoginState();

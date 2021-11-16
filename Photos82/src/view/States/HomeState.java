@@ -16,8 +16,20 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the HomeController
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class HomeState extends PhotosState{
+	/**
+	 * the singleton HomeState
+	 */
 	private static HomeState currentState;
+	/**
+	 * the constructor
+	 */
 	private HomeState() {
 		
 	}
@@ -194,6 +206,10 @@ public class HomeState extends PhotosState{
 		}
 		return this;
 	}
+	/**
+	 * Returns the singleton HomeState
+	 * @return	the singleton HomeState
+	 */
 	public static HomeState getInstance() {
 		if(HomeState.currentState == null) {
 			HomeState.currentState = new HomeState();

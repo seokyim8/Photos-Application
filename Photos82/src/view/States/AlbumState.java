@@ -23,8 +23,20 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the AlbumController
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class AlbumState extends PhotosState{
+	/**
+	 * the singleton AlbumState
+	 */
 	private static AlbumState currentState;
+	/**
+	 * the constructor
+	 */
 	private AlbumState() {
 		
 	}
@@ -206,12 +218,19 @@ public class AlbumState extends PhotosState{
 		updateAlbumInfo();
 		return this;
 	}
+	/**
+	 * Returns the singleton AlbumState
+	 * @return	the singleton AlbumState
+	 */
 	public static AlbumState getInstance() {
 		if(AlbumState.currentState == null) {
 			AlbumState.currentState = new AlbumState();
 		}
 		return AlbumState.currentState;
 	}
+	/**
+	 * Updates the album info in the album scene
+	 */
 	private void updateAlbumInfo() {
 		String fromDate, toDate;
 		if(this.album.date_range[0] == null) {
@@ -230,6 +249,12 @@ public class AlbumState extends PhotosState{
 		this.album.num_of_photos + "\nRange of Dates: " + fromDate + " to " + toDate;
 		this.main_controller.album_controller.album_info_text.setText(album_info);
 	}
+	/**
+	 * Turns the given LocalDateTime instance into a proper String version
+	 * 
+	 * @param datetime	the given LocalDateTime instance
+	 * @return	A String version of datetime 
+	 */
 	private String refineLocalDateTime(LocalDateTime datetime) {//try testing in the morning (or change local time)
 		String[] split_arr1 = datetime.toString().split("T");
 		String[] split_arr2 = split_arr1[1].split(":");

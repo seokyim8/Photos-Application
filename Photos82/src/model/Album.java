@@ -5,18 +5,44 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
+/**
+ * The Album class contains a list of photos on which various actions can be made.
+ * An Album corresponds to exactly one user, and can contains many photos. 
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class Album implements Serializable{
 	/**
-	 * 
+	 * the serial version UID for storing data
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * the name of the album
+	 */
 	public String name;
+	/**
+	 * the number of photos within the album
+	 */
 	public int num_of_photos;
+	/**
+	 * the date range of the photos within the album
+	 */
 	public LocalDateTime[] date_range;
+	/**
+	 * the user that owns this album instance
+	 */
 	public User user;
+	/**
+	 * the ArrayList of Photo which contains all the photos for this album
+	 */
 	public ArrayList<Photo> photos;
 	
+	/**
+	 * the constructor
+	 * @param name	the album name
+	 * @param user 	the username
+	 */
 	public Album(String name, User user) {
 		this.name = name;
 		this.user = user;
@@ -28,12 +54,12 @@ public class Album implements Serializable{
 	/**
 	 * Adds photo to the Album instance.
 	 * 
-	 * @param filePath
+	 * @param filePath	file path for the to-be-added photo
 	 * @return	0 if successful, 1 if filePath is invalid, 2 if photo already exists, 3 if file path does not specify an image file
-	 * @throws IOException 
+	 * @throws IOException if an input or output exception occurred
 	 */
 	public int addPhoto(String filePath) throws IOException {
-		if(!isImageExtention(filePath)) {
+		if(!isImageExtension(filePath)) {
 			return 3;
 		}
 		for(int i = 0; i < this.photos.size(); i++) {
@@ -78,6 +104,11 @@ public class Album implements Serializable{
 		
 		return 0;
 	}
+	/**
+	 * Links an already existing Photo instance with this album.
+	 * 
+	 * @param given the Photo instance to be linked with this album
+	 */
 	public void addPhotoThroughLink(Photo given) {
 		this.photos.add(given);
 		this.num_of_photos++;
@@ -95,6 +126,12 @@ public class Album implements Serializable{
 		}
 		given.albums.add(this);
 	}
+	/**
+	 * Deletes the Photo that exists at the specified index within the ArrayList photos.
+	 * 
+	 * @param index	the index at which the to-be-deleted Photo instance exists
+	 * @return	true if successful, false otherwise
+	 */
 	public boolean deletePhoto(int index) {
 		if(index < 0 || index >= this.photos.size()) {
 			return false;
@@ -106,6 +143,12 @@ public class Album implements Serializable{
 		updateDateRange();
 		return true;
 	}
+	/**
+	 * Renames this album.
+	 * 
+	 * @param name	the new name for the album
+	 * @return	true if successful, false otherwise
+	 */
 	public boolean rename(String name) {
 		for(int i = 0; i < this.user.albums.size(); i++) {
 			if(this.user.albums.get(i).name.compareTo(name) == 0) {
@@ -115,7 +158,13 @@ public class Album implements Serializable{
 		this.name = name;
 		return true;
 	}
-	private boolean isImageExtention(String filePath) {
+	/**
+	 * Checks whether the given filePath ends with an extension that corresponds to an image file
+	 * 
+	 * @param filePath	the filePath of the image file 
+	 * @return	true if the file is an image file, false otherwise
+	 */
+	private boolean isImageExtension(String filePath) {
 		String[] arr = filePath.split(Pattern.quote("."));
 		String extension = arr[arr.length-1];
 		extension.toLowerCase();
@@ -128,6 +177,10 @@ public class Album implements Serializable{
 		}
 		return false;
 	}
+	/**
+	 * Updates the date range for this album
+	 * 
+	 */
 	public void updateDateRange() {
 		if(this.photos.size() == 0) {
 			this.date_range = new LocalDateTime[2];

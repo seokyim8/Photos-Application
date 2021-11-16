@@ -26,9 +26,24 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the SearchController.
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class SearchState extends PhotosState{
+	/**
+	 * the singleton SearchState
+	 */
 	private static SearchState currentState;
+	/**
+	 * the ArrayList of Photos that contains the resulting photos after search
+	 */
 	private ArrayList<Photo> searched_photos;
+	/**
+	 * the constructor
+	 */
 	private SearchState() {
 		
 	}
@@ -210,12 +225,23 @@ public class SearchState extends PhotosState{
 		alert.showAndWait();
 		return this;
 	}
+	/**
+	 * Returns the singleton SearchState
+	 * @return	the singleton SearchState
+	 */
 	public static SearchState getInstance() {
 		if(SearchState.currentState == null) {
 			SearchState.currentState = new SearchState();
 		}
 		return SearchState.currentState;
 	}
+	/**
+	 * Checks the validity of the provided strings in terms of them being a valid LocalDate instance
+	 * 
+	 * @param fromDate	the from date String
+	 * @param toDate	the to date	String
+	 * @return	true if they are valid String that can be converted to LocalDate instances, false otherwise
+	 */
 	private boolean areValidDates(String fromDate, String toDate) {
 		try {
 			LocalDate.parse(fromDate);
@@ -226,6 +252,11 @@ public class SearchState extends PhotosState{
 		}
 		return true;
 	}
+	/**
+	 * Shows/Displays all the Photos that result after a search
+	 * 
+	 * @param photo_arr	the ArrayList of Photos that is a search result
+	 */
 	private void showPhotos(ArrayList<Photo> photo_arr) {
 		if(this.main_controller.search_controller.obs == null) {
 			this.main_controller.search_controller.obs = FXCollections.observableArrayList();
@@ -286,6 +317,12 @@ public class SearchState extends PhotosState{
 		});
 		listview.setItems(obs);
 	}
+	/**
+	 * Turns the given LocalDateTime instance into a proper String version
+	 * 
+	 * @param datetime	the given LocalDateTime instance
+	 * @return	A String version of datetime 
+	 */
 	private String refineLocalDateTime(LocalDateTime datetime) {//try testing in the morning (or change local time)
 		String[] split_arr1 = datetime.toString().split("T");
 		String[] split_arr2 = split_arr1[1].split(":");
@@ -299,6 +336,9 @@ public class SearchState extends PhotosState{
 		}
 		return split_arr1[0] + " " + hour + ":" + minute + am_pm;
 	}
+	/**
+	 * Clears the changes made to the original setup for the current scene
+	 */
 	private void clearItems() {
 		this.main_controller.search_controller.from_textfield.setText("");
 		this.main_controller.search_controller.to_textfield.setText("");
@@ -310,6 +350,9 @@ public class SearchState extends PhotosState{
 		this.searched_photos = new ArrayList<Photo>();
 		populateComboBoxes();
 	}
+	/**
+	 * Populates the ComboBoxes for the current scene
+	 */
 	private void populateComboBoxes() {
 		ComboBox<String> cb1 = this.main_controller.search_controller.tag_name1_combobox;
 		ComboBox<String> cb2 = this.main_controller.search_controller.tag_name2_combobox;

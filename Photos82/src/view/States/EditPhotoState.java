@@ -26,8 +26,20 @@ import model.Tag;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the EditPhotoController
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class EditPhotoState extends PhotosState{
+	/**
+	 * the singleton EditPhotoState
+	 */
 	private static EditPhotoState currentState;
+	/**
+	 * the constructor
+	 */
 	private EditPhotoState() {
 		
 	}
@@ -222,12 +234,19 @@ public class EditPhotoState extends PhotosState{
 		tempState.enter(this.admin, this.user, this.album, this.photo);
 		return tempState;
 	}
+	/**
+	 * Returns the singleton EditPhotoState
+	 * @return	the singleton EditPhotoState
+	 */
 	public static EditPhotoState getInstance() {
 		if(EditPhotoState.currentState == null) {
 			EditPhotoState.currentState = new EditPhotoState();
 		}
 		return EditPhotoState.currentState;
 	}
+	/**
+	 * Updates/sets up the photo in the current scene
+	 */
 	private void updatePhoto() {
 		ImageView temp_imageview = this.main_controller.editphoto_controller.photo_imageview;
 		try {
@@ -242,6 +261,9 @@ public class EditPhotoState extends PhotosState{
 		temp_imageview.setPreserveRatio(true);
 		updatePhotoInfo();
 	}
+	/**
+	 * Updates the photo information for the current scene
+	 */
 	private void updatePhotoInfo() {
 		String caption = this.photo.caption;
 		String tags = "";
@@ -259,6 +281,12 @@ public class EditPhotoState extends PhotosState{
 		this.main_controller.editphoto_controller.tags_text.setText("Tags: " + tags);
 		this.main_controller.editphoto_controller.album_text.setText(this.album.name);
 	}
+	/**
+	 * Turns the given LocalDateTime instance into a proper String version
+	 * 
+	 * @param datetime	the given LocalDateTime instance
+	 * @return	A String version of datetime 
+	 */
 	private String refineLocalDateTime(LocalDateTime datetime) {//try testing in the morning (or change local time)
 		String[] split_arr1 = datetime.toString().split("T");
 		String[] split_arr2 = split_arr1[1].split(":");
@@ -272,6 +300,9 @@ public class EditPhotoState extends PhotosState{
 		}
 		return split_arr1[0] + " " + hour + ":" + minute + am_pm;
 	}
+	/**
+	 * Sets up the TableView for the current scene
+	 */
 	private void setupTable() {
 		TableColumn<Tag,Tag> col = this.main_controller.editphoto_controller.button_column;
 		TableView<Tag> tv = this.main_controller.editphoto_controller.tags_tableview;
@@ -310,6 +341,9 @@ public class EditPhotoState extends PhotosState{
 		});
 		tv.setItems(obs);
 	}
+	/**
+	 * Sets up the ComboBox for the current scene;
+	 */
 	private void setupComboBox() {
 		ComboBox<String> cb1 = this.main_controller.editphoto_controller.tag_name_combobox;
 		cb1.getItems().clear();

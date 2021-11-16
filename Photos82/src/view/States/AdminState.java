@@ -16,8 +16,20 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the AdminController
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class AdminState extends PhotosState{
+	/**
+	 * the singleton AdminState
+	 */
 	private static AdminState currentState;
+	/**
+	 * the constructor
+	 */
 	private AdminState() {
 		
 	}
@@ -147,6 +159,10 @@ public class AdminState extends PhotosState{
 		//DO NOT alLOW space as username?? or are there other restrictions??
 	}
 	
+	/**
+	 * Returns the singleton AdminState
+	 * @return	the singleton AdminState
+	 */
 	public static AdminState getInstance() {
 		if(AdminState.currentState == null) {
 			AdminState.currentState = new AdminState();

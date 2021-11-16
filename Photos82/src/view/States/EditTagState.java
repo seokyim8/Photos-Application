@@ -15,9 +15,20 @@ import model.Photo;
 import model.User;
 import view.MainController;
 
+/**
+ * This class takes care of events that happen in the scene that corresponds to the EditTagController
+ * 
+ * @author Seok Yim, Mae Khaled
+ *
+ */
 public class EditTagState extends PhotosState{
+	/**
+	 * the singleton EditTagState
+	 */
 	private static EditTagState currentState;
-	
+	/**
+	 * the constructor
+	 */
 	private EditTagState() {
 		
 	}
@@ -124,12 +135,20 @@ public class EditTagState extends PhotosState{
 		return tempState;
 	}
 
+	/**
+	 * Returns the singleton EditTagState
+	 * 
+	 * @return	the singleton EditTageState
+	 */
 	public static EditTagState getInstance() {
 		if(EditTagState.currentState == null) {
 			EditTagState.currentState = new EditTagState();
 		}
 		return EditTagState.currentState;
 	}
+	/**
+	 * Sets up the ComboBox for the current scene
+	 */
 	private void setUpComboBox() {
 		ComboBox<String> cb = this.main_controller.edittag_controller.tag_combobox;
 		cb.getItems().clear();
