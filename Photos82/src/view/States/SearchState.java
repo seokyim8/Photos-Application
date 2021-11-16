@@ -41,8 +41,6 @@ public class SearchState extends PhotosState{
 		this.user = user;
 		this.album = album;
 		this.photo = photo;
-		
-		populateComboboxes();
 		clearItems();
 	}
 
@@ -89,29 +87,19 @@ public class SearchState extends PhotosState{
 			showPhotos(this.searched_photos);
 			return this;
 		}
-		if(button == this.main_controller.search_controller.search_by_tags_button) {
-			if(this.main_controller.search_controller.and_or_combobox.getValue() == null) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.initOwner(this.main_controller.primaryStage);
-				alert.setTitle("Error: empty selection for AND/OR ");
-				alert.setResizable(false);
-				alert.setHeaderText("Error: And/OR has not been selected. Please select " +
-				"a value from the AND/OR options.");
-				alert.showAndWait();
-				return this;
-			}
+		if(button == this.main_controller.search_controller.search_by_tags_button) {//not working properly!!
 			String tag1_name = "";
-			if(this.main_controller.search_controller.tag_name1_combobox.getValue() != null) {
-				tag1_name = this.main_controller.search_controller.tag_name1_combobox.getValue();
+			if(!this.main_controller.search_controller.tag_name1_combobox.getSelectionModel().isSelected(0)) {
+				tag1_name = this.main_controller.search_controller.tag_name1_combobox.getSelectionModel().getSelectedItem();
 			}
 			String tag1_val = this.main_controller.search_controller.tag_value1_textfield.getText();
 			String tag2_name = "";
-			if(this.main_controller.search_controller.tag_name2_combobox.getValue() != null) {
-				tag2_name = this.main_controller.search_controller.tag_name2_combobox.getValue();	
+			if(!this.main_controller.search_controller.tag_name2_combobox.getSelectionModel().isSelected(0)) {
+				tag2_name = this.main_controller.search_controller.tag_name2_combobox.getSelectionModel().getSelectedItem();	
 			}
 			String tag2_val = this.main_controller.search_controller.tag_value2_textfield.getText();
 			boolean isAnd = true;
-			if(this.main_controller.search_controller.and_or_combobox.getValue().compareTo("or") == 0) {
+			if(this.main_controller.search_controller.and_or_combobox.getSelectionModel().getSelectedItem().compareTo("or")==0) {
 				isAnd = false;
 			}
 			this.searched_photos = this.user.searchByTags(tag1_name, tag1_val, tag2_name, tag2_val, isAnd);
@@ -222,21 +210,28 @@ public class SearchState extends PhotosState{
 		if(this.main_controller.search_controller.obs != null) {
 			this.main_controller.search_controller.obs.clear();
 		}
+		populateComboBoxes();
 	}
-	private void populateComboboxes() {
+	private void populateComboBoxes() {
 		ComboBox<String> cb1 = this.main_controller.search_controller.tag_name1_combobox;
 		ComboBox<String> cb2 = this.main_controller.search_controller.tag_name2_combobox;
 		ComboBox<String> cb3 = this.main_controller.search_controller.and_or_combobox;
 		cb1.getItems().clear();
 		cb2.getItems().clear();
 		cb3.getItems().clear();
+		
+		cb1.getItems().add("Select Tag");
 		for(int i = 0; i < this.user.tagnames.size(); i++) {
 			cb1.getItems().add(this.user.tagnames.get(i));
 		}
+		cb2.getItems().add("Select Tag");
 		for(int i = 0; i < this.user.tagnames.size(); i++) {
 			cb2.getItems().add(this.user.tagnames.get(i));
 		}
 		cb3.getItems().add("and");
 		cb3.getItems().add("or");
+		cb1.getSelectionModel().clearAndSelect(0);
+		cb2.getSelectionModel().clearAndSelect(0);
+		cb3.getSelectionModel().clearAndSelect(0);
 	}
 }

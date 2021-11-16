@@ -16,6 +16,7 @@ public class HomeController implements Controller{
 	public @FXML Button delete_album_button;
 	public @FXML Button log_out_button;
 	public @FXML Button quit_button;
+	public @FXML Button add_tags_button;
 	public @FXML TextField create_album_textfield;
 	public @FXML ListView<String> albums_listview;
 	public ObservableList<String> obs;

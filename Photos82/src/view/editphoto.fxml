@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -40,7 +41,6 @@
         </columns>
       </TableView>
       <Button fx:id="add_tag_button" layoutX="328.0" layoutY="213.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="69.0" text="Add Tag" />
-      <TextField fx:id="tag_name_textfield" layoutX="407.0" layoutY="213.0" prefHeight="26.0" prefWidth="88.0" promptText="name" />
       <TextField fx:id="tag_value_textfield" layoutX="502.0" layoutY="213.0" prefHeight="26.0" prefWidth="88.0" promptText="value" />
       <Separator layoutX="328.0" layoutY="254.0" prefHeight="4.0" prefWidth="260.0" />
       <Separator layoutX="321.0" layoutY="36.0" orientation="VERTICAL" prefHeight="347.0" prefWidth="7.0" />
@@ -52,5 +52,6 @@
       <Text fx:id="caption_text" layoutX="25.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="260.0" />
       <Text fx:id="date_time_text" layoutX="25.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date-Time:" wrappingWidth="260.0" />
       <Text fx:id="tags_text" layoutX="25.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="260.0" />
+      <ComboBox fx:id="tag_name_combobox" layoutX="403.0" layoutY="213.0" prefHeight="26.0" prefWidth="96.0" promptText="name" />
    </children>
 </AnchorPane>

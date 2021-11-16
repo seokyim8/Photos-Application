@@ -1,12 +1,14 @@
 package view.States;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import model.Admin;
 import model.Album;
@@ -68,6 +70,12 @@ public class HomeState extends PhotosState{
 			tempState.enter(null,null,null,null);
 			return tempState;
 		}
+		if(button == this.main_controller.home_controller.add_tags_button) {
+			this.main_controller.primaryStage.setScene(this.main_controller.addtag_scene);
+			AddTagState tempState = this.main_controller.addtag_state;
+			tempState.enter(this.admin,this.user,this.album,this.photo);
+			return tempState;
+		}
 		if(button == this.main_controller.home_controller.create_album_button) {
 			String tbc_album = this.main_controller.home_controller.create_album_textfield.getText();
 			if(!this.user.createAlbum(tbc_album)) {//cannot create album
@@ -107,6 +115,13 @@ public class HomeState extends PhotosState{
 					e1.printStackTrace();
 					this.main_controller.primaryStage.close();
 				}
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Success: created album");
+				alert.setContentText("Success: created album.");
+				alert.showAndWait();
 				return this;
 			}
 		}
@@ -146,6 +161,16 @@ public class HomeState extends PhotosState{
 			alert.showAndWait();
 			return this;
 		}
+		Alert confirmation = new Alert(AlertType.CONFIRMATION);
+		confirmation.initOwner(this.main_controller.primaryStage);
+		confirmation.setResizable(false);
+		confirmation.setHeaderText("Deleting Album");
+		confirmation.setContentText("Are you sure you want to delete this album?");
+		Optional<ButtonType> result = confirmation.showAndWait();
+		if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+			return this;
+		}
+		
 		ObservableList<String> obs = this.main_controller.home_controller.obs;
 		int index = this.main_controller.home_controller.albums_listview.getSelectionModel().getSelectedIndex();
 		this.user.albums.remove(index);

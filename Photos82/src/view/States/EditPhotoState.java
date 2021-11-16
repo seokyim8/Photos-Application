@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -45,6 +46,7 @@ public class EditPhotoState extends PhotosState{
 		
 		updatePhoto();
 		setupTable();
+		setupComboBox();
 	}
 
 	@Override
@@ -67,18 +69,29 @@ public class EditPhotoState extends PhotosState{
 			return this;
 		}
 		if(button == this.main_controller.editphoto_controller.add_tag_button) {
-			String name = this.main_controller.editphoto_controller.tag_name_textfield.getText();
+			String name = this.main_controller.editphoto_controller.tag_name_combobox.getValue();
 			String value = this.main_controller.editphoto_controller.tag_value_textfield.getText();
-			if(name.trim().compareTo("") == 0 || value.trim().compareTo("") == 0) {
+			if(this.main_controller.editphoto_controller.tag_name_combobox.getSelectionModel().isSelected(0)) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
 				alert.setResizable(false);
-				alert.setHeaderText("Error: invalid tag input");
-				alert.setContentText("Error: Invalid tag input. Please provide "
-						+ "a tag name and a tag value that are not empty or are not only spaces.");
+				alert.setHeaderText("Error: empty selection");
+				alert.setContentText("Error: Invalid selection. Please select "
+						+ "a tag name from the list of tags provided.");
 				alert.showAndWait();
 				return this;
 			}
+			if(value.trim().compareTo("") == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: invalid tag value input");
+				alert.setContentText("Error: Invalid tag value input. Please provide "
+						+ "a tag value that is not empty or is not only spaces.");
+				alert.showAndWait();
+				return this;
+			}
+			
 			if(!this.photo.addTag(name.trim(), value.trim())) {//failed to add tag
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
@@ -90,6 +103,13 @@ public class EditPhotoState extends PhotosState{
 				return this;
 			}
 			//successfully added tag
+			try {
+				Admin.writeApp(this.admin);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				this.main_controller.primaryStage.close();
+			}
 			this.main_controller.editphoto_controller.obs.add(this.photo.tags.get(this.photo.tags.size()-1));
 			updatePhotoInfo();
 			return this;
@@ -289,5 +309,14 @@ public class EditPhotoState extends PhotosState{
 			}
 		});
 		tv.setItems(obs);
+	}
+	private void setupComboBox() {
+		ComboBox<String> cb1 = this.main_controller.editphoto_controller.tag_name_combobox;
+		cb1.getItems().clear();
+		cb1.getItems().add("Select");
+		for(int i = 0; i < this.user.tagnames.size(); i++) {
+			cb1.getItems().add(this.user.tagnames.get(i));
+		}
+		cb1.getSelectionModel().clearAndSelect(0);
 	}
 }

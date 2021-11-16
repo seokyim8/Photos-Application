@@ -4,12 +4,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
@@ -140,6 +142,15 @@ public class AlbumState extends PhotosState{
 			return tempState;
 		}
 		if(button == this.main_controller.album_controller.rename_album_button) {
+			Alert confirmation = new Alert(AlertType.CONFIRMATION);
+			confirmation.initOwner(this.main_controller.primaryStage);
+			confirmation.setResizable(false);
+			confirmation.setHeaderText("Are you sure you want to rename this album?");
+			Optional<ButtonType> result = confirmation.showAndWait();
+			if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+				return this;
+			}
+			
 			String name = this.main_controller.album_controller.rename_album_textfield.getText();
 			if(!this.album.rename(name)) {//renaming failed
 				Alert alert = new Alert(AlertType.ERROR);
@@ -174,6 +185,15 @@ public class AlbumState extends PhotosState{
 			alert.showAndWait();
 			return this;
 		}
+		Alert confirmation = new Alert(AlertType.CONFIRMATION);
+		confirmation.initOwner(this.main_controller.primaryStage);
+		confirmation.setResizable(false);
+		confirmation.setHeaderText("Are you sure you want to delete this photo?");
+		Optional<ButtonType> result = confirmation.showAndWait();
+		if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+			return this;
+		}
+		
 		int index = this.main_controller.album_controller.photos_list.getSelectionModel().getSelectedIndex();
 		this.main_controller.album_controller.obs.remove(index);
 		this.album.deletePhoto(index);

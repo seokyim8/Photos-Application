@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,7 +28,7 @@ public class EditPhotoController implements Controller{
 	public @FXML Text date_time_text;
 	public @FXML Text tags_text;
 	public @FXML TextField caption_textfield;
-	public @FXML TextField tag_name_textfield;
+	public @FXML ComboBox<String> tag_name_combobox;
 	public @FXML TextField tag_value_textfield;
 	public @FXML TextField to_album_textfield;
 	public @FXML TableView<Tag> tags_tableview;

@@ -59,6 +59,15 @@ public class User implements Serializable{
 		}
 		return false;
 	}
+	public boolean addTagType(String name) {
+		for(int i = 0; i < this.tagnames.size(); i++) {
+			if(name.compareTo(this.tagnames.get(i)) == 0) {//duplicate tag type found
+				return false;
+			}
+		}
+		this.tagnames.add(name);
+		return true;
+	}
 	public ArrayList<Photo> searchByDate(String fromDate, String toDate){//assumes dates are parsable
 		ArrayList<Photo> tbr = new ArrayList<Photo>();
 		for(int i = 0; i < this.albums.size(); i++) {
