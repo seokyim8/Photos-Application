@@ -78,13 +78,23 @@ public class HomeState extends PhotosState{
 		}
 		if(button == this.main_controller.home_controller.create_album_button) {
 			String tbc_album = this.main_controller.home_controller.create_album_textfield.getText();
+			if(tbc_album.trim().length() == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: empty/invalid albumname");
+				alert.setContentText("Error: Empty/invalid albumname. Please type in "
+						+ "an album name that is not empty and does not only contains spaces.");
+				alert.showAndWait();
+				return this;
+			}
 			if(!this.user.createAlbum(tbc_album)) {//cannot create album
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
 				alert.setResizable(false);
 				alert.setHeaderText("Error: duplicate albumname");
 				alert.setContentText("Error: Duplicate album name exists. Please type in "
-						+ "a album name that does not exist yet.");
+						+ "an album name that does not exist yet.");
 				alert.showAndWait();
 				return this;
 			}

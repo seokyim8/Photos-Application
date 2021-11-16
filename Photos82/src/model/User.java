@@ -113,12 +113,16 @@ public class User implements Serializable{
 						continue;
 					}
 					if(isAnd) {
+						boolean satisfies = true;
 						for(int k = 0; k < tag_arr.size(); k++) {
 							if(!photo.tags.contains(tag_arr.get(k))) {
+								satisfies = false;
 								break;
 							}
 						}
-						tbr.add(photo);
+						if(satisfies) {
+							tbr.add(photo);
+						}
 					}
 					else {//isOr
 						for(int k = 0; k < tag_arr.size(); k++) {

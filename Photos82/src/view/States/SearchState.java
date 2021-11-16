@@ -90,16 +90,62 @@ public class SearchState extends PhotosState{
 		if(button == this.main_controller.search_controller.search_by_tags_button) {//not working properly!!
 			String tag1_name = "";
 			if(!this.main_controller.search_controller.tag_name1_combobox.getSelectionModel().isSelected(0)) {
-				tag1_name = this.main_controller.search_controller.tag_name1_combobox.getSelectionModel().getSelectedItem();
+				tag1_name = this.main_controller.search_controller.tag_name1_combobox.getValue();
 			}
 			String tag1_val = this.main_controller.search_controller.tag_value1_textfield.getText();
+			if(this.main_controller.search_controller.tag_name1_combobox.getSelectionModel().isSelected(0) 
+					&& tag1_val.trim().length() != 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setTitle("Error: unselected tag type ");
+				alert.setResizable(false);
+				alert.setHeaderText("Error: Unselected tag type. Please select " +
+				"a tag name for the provided tag value");
+				alert.showAndWait();
+				return this;
+			}
+			if(!this.main_controller.search_controller.tag_name1_combobox.getSelectionModel().isSelected(0) 
+					&& tag1_val.trim().length() == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setTitle("Error: empty tag value ");
+				alert.setResizable(false);
+				alert.setHeaderText("Error: Empty tag value. Please type in " +
+				"a tag value for the selected tag name (pure sequence of spaces not allowed)");
+				alert.showAndWait();
+				return this;
+			}
+			
 			String tag2_name = "";
 			if(!this.main_controller.search_controller.tag_name2_combobox.getSelectionModel().isSelected(0)) {
-				tag2_name = this.main_controller.search_controller.tag_name2_combobox.getSelectionModel().getSelectedItem();	
+				tag2_name = this.main_controller.search_controller.tag_name2_combobox.getValue();
 			}
 			String tag2_val = this.main_controller.search_controller.tag_value2_textfield.getText();
+			if(this.main_controller.search_controller.tag_name2_combobox.getSelectionModel().isSelected(0) 
+					&& tag2_val.trim().length() != 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setTitle("Error: unselected tag type ");
+				alert.setResizable(false);
+				alert.setHeaderText("Error: Unselected tag type. Please select " +
+				"a tag name for the provided tag value");
+				alert.showAndWait();
+				return this;
+			}
+			if(!this.main_controller.search_controller.tag_name2_combobox.getSelectionModel().isSelected(0) 
+					&& tag2_val.trim().length() == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setTitle("Error: empty tag value ");
+				alert.setResizable(false);
+				alert.setHeaderText("Error: Empty tag value. Please type in " +
+				"a tag value for the selected tag name (pure sequence of spaces not allowed)");
+				alert.showAndWait();
+				return this;
+			}
+			
 			boolean isAnd = true;
-			if(this.main_controller.search_controller.and_or_combobox.getSelectionModel().getSelectedItem().compareTo("or")==0) {
+			if(this.main_controller.search_controller.and_or_combobox.getValue().compareTo("or")==0) {
 				isAnd = false;
 			}
 			this.searched_photos = this.user.searchByTags(tag1_name, tag1_val, tag2_name, tag2_val, isAnd);

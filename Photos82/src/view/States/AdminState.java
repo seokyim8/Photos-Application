@@ -1,6 +1,7 @@
 package view.States;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import model.Admin;
 import model.Album;
 import model.Photo;
@@ -65,6 +67,13 @@ public class AdminState extends PhotosState{
 					e1.printStackTrace();
 					this.main_controller.primaryStage.close();
 				}
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Success: username addition");
+				alert.setContentText("Success: username addition");
+				alert.showAndWait();
+				
 				return this;
 			}
 			else {
@@ -89,6 +98,16 @@ public class AdminState extends PhotosState{
 			alert.showAndWait();
 			return this;
 		}
+		Alert confirmation = new Alert(AlertType.CONFIRMATION);
+		confirmation.initOwner(this.main_controller.primaryStage);
+		confirmation.setResizable(false);
+		confirmation.setHeaderText("Deleting user");
+		confirmation.setContentText("Are you sure you want to delete this user?");
+		Optional<ButtonType> result = confirmation.showAndWait();
+		if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+			return this;
+		}
+		
 		String tbd_username = this.main_controller.admin_controller.user_listview.getSelectionModel().getSelectedItem();
 		this.admin.deleteuser(tbd_username);
 		try {
