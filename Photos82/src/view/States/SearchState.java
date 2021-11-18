@@ -76,8 +76,8 @@ public class SearchState extends PhotosState{
 			return tempState;
 		}
 		if(button == this.main_controller.search_controller.search_by_date_button) {
-			String fromDate = this.main_controller.search_controller.from_textfield.getText();
-			String toDate = this.main_controller.search_controller.to_textfield.getText();
+			String fromDate = this.main_controller.search_controller.from_textfield.getText().trim();
+			String toDate = this.main_controller.search_controller.to_textfield.getText().trim();
 			if(!areValidDates(fromDate, toDate)) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(this.main_controller.primaryStage);
