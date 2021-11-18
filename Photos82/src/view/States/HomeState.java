@@ -128,6 +128,17 @@ public class HomeState extends PhotosState{
 			}
 		}
 		if(button == this.main_controller.home_controller.rename_button) {
+			if(this.main_controller.home_controller.albums_listview.getSelectionModel().isEmpty()) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(this.main_controller.primaryStage);
+				alert.setResizable(false);
+				alert.setHeaderText("Error: no album selected");
+				alert.setContentText("Error: No album is selected. Please select "
+						+ "an album from the list that you want to rename.");
+				alert.showAndWait();
+				return this;
+			}
+			
 			Alert confirmation = new Alert(AlertType.CONFIRMATION);
 			confirmation.initOwner(this.main_controller.primaryStage);
 			confirmation.setResizable(false);
