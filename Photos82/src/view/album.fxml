@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AlbumController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AlbumController">
    <children>
-      <Text layoutX="176.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos List">
+      <Text layoutX="176.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos List">
          <font>
             <Font size="14.0" />
          </font>
@@ -19,7 +19,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <ListView fx:id="photos_list" layoutX="14.0" layoutY="181.0" prefHeight="300.0" prefWidth="389.0" />
+      <ListView fx:id="photos_list" layoutX="14.0" layoutY="142.0" prefHeight="553.0" prefWidth="389.0" />
       <Text fx:id="album_info_text" layoutX="27.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text for Album Description" wrappingWidth="364.0" />
       <TextField fx:id="rename_album_textfield" layoutX="425.0" layoutY="33.0" />
       <Button fx:id="rename_album_button" layoutX="431.0" layoutY="75.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="148.0" text="Rename Album" />

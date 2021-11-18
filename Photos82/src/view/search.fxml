@@ -9,12 +9,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchController">
    <children>
       <Button fx:id="quit_button" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="99.0" text="Quit" />
       <Button fx:id="go_back_home_button" layoutX="159.0" layoutY="15.0" mnemonicParsing="false" onAction="#processEvent" text="Go Back Home" />
-      <ListView fx:id="photos_listview" layoutX="14.0" layoutY="59.0" prefHeight="231.0" prefWidth="389.0" />
-      <Button fx:id="create_album_button" layoutX="50.0" layoutY="348.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="237.0" text="Create Album Based on Search Result" />
+      <ListView fx:id="photos_listview" layoutX="14.0" layoutY="59.0" prefHeight="519.0" prefWidth="389.0" />
+      <Button fx:id="create_album_button" layoutX="107.0" layoutY="637.0" mnemonicParsing="false" onAction="#processEvent" prefHeight="26.0" prefWidth="237.0" text="Create Album Based on Search Result" />
       <Text layoutX="503.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search/Filter Photos">
          <font>
             <Font size="16.0" />
@@ -34,7 +34,7 @@
       <Text layoutX="418.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tag 1:" />
       <Text layoutX="418.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tag 2:" />
       <Text layoutX="459.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="and / or" wrappingWidth="52.283203125" />
-      <TextField fx:id="album_name_textfield" layoutX="130.0" layoutY="307.0" promptText="Album Name" />
-      <Text layoutX="47.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album name" wrappingWidth="84.97741223247397" />
+      <TextField fx:id="album_name_textfield" layoutX="197.0" layoutY="591.0" promptText="Album Name" />
+      <Text layoutX="114.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album name" wrappingWidth="84.97741223247397" />
    </children>
 </AnchorPane>
